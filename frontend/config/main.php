@@ -7,6 +7,8 @@ $params = array_merge(
 );
 
 return [
+    'language'=>'uz',
+    'defaultRoute'=>'index/index',
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -34,16 +36,16 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'index/error',
         ],
-        /*
+     
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+ 
     ],
     'params' => $params,
 ];

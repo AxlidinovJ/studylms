@@ -1,11 +1,12 @@
 <?php
 
-use frontend\assets\SaytAsset;
-use yii\bootstrap4\Breadcrumbs;
+use frontend\assets\Sayt2Asset;
+use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-SaytAsset::register($this);
+
+Sayt2Asset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -21,10 +22,9 @@ SaytAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-	<!-- main container of all the page elements -->
-	<div id="wrapper">
+<div id="wrapper">
 		<!-- header of the page -->
-		<header id="page-header" class="page-header-stick">
+		<header id="page-header">
 			<!-- top bar -->
 			<div class="top-bar bg-dark text-gray">
 				<div class="container">
@@ -65,8 +65,7 @@ SaytAsset::register($this);
 							<!-- logo -->
 							<div class="logo">
 								<a href="<?=url::home()?>">
-									<img class="hidden-xs" src="images/logo.png" alt="studylms">
-									<img class="hidden-sm hidden-md hidden-lg" src="images/logo-dark.png" alt="studylms">
+									<img src="<?=url::to('/frontend/web/images/logo-dark.png')?>" alt="studylms">
 								</a>
 							</div>
 						</div>
@@ -83,7 +82,6 @@ SaytAsset::register($this);
 								</div>
 								<!-- navbar collapse -->
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-									<!-- main navigation -->
 									<!-- main navigation -->
 									<ul class="nav navbar-nav navbar-right main-navigation text-uppercase font-lato">
 										<li class="dropdown">
@@ -153,7 +151,27 @@ SaytAsset::register($this);
 		</header>
 		<!-- contain main informative part of the site -->
 		<main id="main">
-		<?=$content?>
+			<!-- heading banner -->
+			<header class="heading-banner text-white bgCover" style="background-image: url(<?=url::to("/backend/web/photos/ah0eIVP2VA-TE3u5ScsTjIq6CyGlbjLg.jpg")?>);">
+				<div class="container holder">
+					<div class="align">
+						<h1><?=$this->params['title']??"Hello world"?></h1>
+					</div>
+				</div>
+			</header>
+			<!-- breadcrumb nav -->
+			
+				<div class="container">
+				<?= Breadcrumbs::widget([
+					'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+				]) ?>
+				</div>
+		
+			<!-- <div id="two-columns" class="container">
+            <div class="row"> -->
+            <?=$content?>
+
+
 		</main>
 		<!-- footer area container -->
 		<div class="footer-area bg-dark text-gray">
@@ -161,7 +179,7 @@ SaytAsset::register($this);
 			<aside class="aside container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-3 col">
-						<div class="logo"><a href="home.html"><img src="images/logo.png" alt="studyLMS"></a></div>
+						<div class="logo"><a href="home"><img src="images/logo.png" alt="studyLMS"></a></div>
 						<p>We have over 20 years experience providing expert Educational both businesses and individuals. Our Investment Committee brings cades the industry expertise in driving our investment approach. portfolio constructor and allocation</p>
 						<a href="#" class="btn btn-default text-uppercase">Start Leaning Now</a>
 					</div>
@@ -170,7 +188,7 @@ SaytAsset::register($this);
 						<!-- widget cources list -->
 						<ul class="widget-cources-list list-unstyled">
 							<li>
-								<a href="<?=url::to(['coursesingle'])?>">
+								<a href="course-single">
 									<div class="alignleft">
 										<img src="https://picsum.photos/60/60" alt="image description">
 									</div>
@@ -181,7 +199,7 @@ SaytAsset::register($this);
 								</a>
 							</li>
 							<li>
-								<a href="<?=url::to(['coursesingle'])?>">
+								<a href="course-single">
 									<div class="alignleft">
 										<img src="https://picsum.photos/60/60" alt="image description">
 									</div>
@@ -192,7 +210,7 @@ SaytAsset::register($this);
 								</a>
 							</li>
 							<li>
-								<a href="<?=url::to(['coursesingle'])?>">
+								<a href="course-single">
 									<div class="alignleft">
 										<img src="https://picsum.photos/60/60" alt="image description">
 									</div>
@@ -304,6 +322,7 @@ SaytAsset::register($this);
 			</form>
 		</div>
 	</div>
+
     <?php $this->endBody() ?>
 </body>
 </html>
