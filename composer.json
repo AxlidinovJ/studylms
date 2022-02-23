@@ -17,7 +17,11 @@
         "php": ">=5.6.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap4": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0"
+        "kartik-v/yii2-widget-datetimepicker": "*",
+        "symfony/mailer": "^5.4",
+        "nkovacs/yii2-datetimepicker": "*",
+        "2amigos/yii2-date-time-picker-widget": "*",
+        "yiisoft/yii2-swiftmailer": "^2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

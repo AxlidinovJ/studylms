@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\models\Courses;
 use backend\models\CoursesSearch;
 use yii\base\Security;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,29 +16,31 @@ use yii\web\UploadedFile;
  */
 class CoursesController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                // 'only' => ['logout', 'signup'],
+                'rules' => [
+                    [
+                        // 'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
-            ]
-        );
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
     }
 
-    /**
-     * Lists all Courses models.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
         $searchModel = new CoursesSearch();
@@ -78,6 +81,7 @@ class CoursesController extends Controller
                 $nomi = $random->generateRandomString(32).".".$rasm->extension;
                 $rasm->saveAs("photos/".$nomi);
                 $model->img = $nomi;
+                $model->instruktor = \yii::$app->user->identity->id;
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }

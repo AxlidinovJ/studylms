@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\Courses;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -210,4 +211,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function getUsers(){
+        return $this->hasMany(Courses::class,['instruktor'=>'id']);
+    }
+
+
+
 }

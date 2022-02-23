@@ -1,14 +1,14 @@
 <?php
-
 use app\models\Coursescategory;
 use yii\helpers\Url;
 $this->title = "Cours list";
 $this->params['breadcrumbs'][] = $this->title;
-$categorys = Coursescategory::find()->all();
 $this->params['title'] = $this->title;
+$categorys = Coursescategory::find()->all();
+
 ?>
 
-<div id="two-columns" class="container">
+		<div id="two-columns" class="container">
 				<div class="row">
 					<!-- content -->
 					<article id="content" class="col-xs-12 col-md-9">
@@ -22,47 +22,47 @@ $this->params['title'] = $this->title;
 							</select>
 						</header>
 						<div class="row flex-wrap">
-							<?php foreach($courses as $cours){?>
+							<?php foreach($courses as $course){?>
 							<div class="col-xs-12 col-sm-6 col-lg-4">
 								<!-- popular post -->
 								<article class="popular-post">
-									<div class="aligncenter">
-										<img src="<?=Url::to("/backend/web/photos/".$cours->img)?>" alt="image description">
+								<div class="aligncenter">
+									<img src="<?=url::to("/backend/web/photos/".$course->img)?>" alt="image description">
+								</div>
+								<div>
+									<strong class="bg-primary text-white font-lato text-uppercase price-tag">$<?=$course->price?></strong>
+								</div>
+								<h3 class="post-heading"><a href="<?=url::to(['coursesingle','id'=>$course->id])?>"><?=$course->title?></a></h3>
+								<div class="post-author">
+									<div class="alignleft rounded-circle no-shrink">
+										<a href="instructor-single.html"><img src="https://picsum.photos/35/35" class="rounded-circle" alt="image description"></a>
 									</div>
-									<div>
-										<strong class="bg-primary text-white font-lato text-uppercase price-tag">$<?=$cours->price?></strong>
-									</div>
-									<h3 class="post-heading"><a href="<?=url::to(['/index/coursesingle','id'=>$cours->id])?>"><?=$cours->title?></a></h3>
-									<div class="post-author">
-										<div class="alignleft rounded-circle no-shrink">
-											<a href="instructor-single.html"><img src="http://placehold.it/35x35" class="rounded-circle" alt="image description"></a>
-										</div>
-										<h4 class="author-heading"><a href="instructor-single.html"><?=$cours->instruktor?></a></h4>
-									</div>
-									<footer class="post-foot gutter-reset">
-										<ul class="list-unstyled post-statuses-list">
-											<li>
-												<a href="#">
-													<span class="fas icn fa-users no-shrink"><span class="sr-only">users</span></span>
-													<strong class="text fw-normal">98</strong>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span class="fas icn no-shrink fa-comments"><span class="sr-only">comments</span></span>
-													<strong class="text fw-normal">10</strong>
-												</a>
-											</li>
-										</ul>
-										<ul class="star-rating list-unstyled">
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-										</ul>
-									</footer>
-								</article>
+									<h4 class="author-heading"><a href="<?=url::to(['instructorsingle','id'=>$course->instruktor2->id])?>"><?=$course->instruktor2->name?></a></h4>
+								</div>
+								<footer class="post-foot gutter-reset">
+									<ul class="list-unstyled post-statuses-list">
+										<li>
+											<a href="#">
+												<span class="fas icn fa-users no-shrink"><span class="sr-only">users</span></span>
+												<strong class="text fw-normal">98</strong>
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<span class="fas icn no-shrink fa-comments"><span class="sr-only">comments</span></span>
+												<strong class="text fw-normal">10</strong>
+											</a>
+										</li>
+									</ul>
+									<ul class="star-rating list-unstyled">
+										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
+										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
+										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
+										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
+										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
+									</ul>
+								</footer>
+							</article>
 							</div>
 							<?php } ?>
 						</div>

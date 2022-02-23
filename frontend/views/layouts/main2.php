@@ -88,48 +88,32 @@ Sayt2Asset::register($this);
 											<a href="<?=url::home()?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">home</a>
 										</li>
 										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
-											<ul class="dropdown-menu">
-												<li><a href="<?=url::to(['courseslist'])?>">Course List</a></li>
-												<li><a href="<?=url::to(['coursesingle'])?>">Course Single</a></li>
-											</ul>
+											<a href="<?=url::to(['courseslist'])?>" class="dropdown-toggle">Courses</a>
 										</li>
 										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events</a>
-											<ul class="dropdown-menu">
-												<li><a href="<?=url::to(['eventslist'])?>">Event List</a></li>
-												<li><a href="<?=url::to(['eventsingle'])?>">Event Single</a></li>
-											</ul>
+											<a href="<?=url::to(['eventslist'])?>" class="dropdown-toggle">Events</a>
 										</li>
 										<li class="dropdown">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
 											<ul class="dropdown-menu">
-												<li><a href="404">404 Page</a></li>
-												<li><a href="about-us">About us</a></li>
-												<li><a href="forum">Forum Page</a></li>
-												<li><a href="forum-single">Forum Single</a></li>
-												<li><a href="instructors-list">Instructors List</a></li>
-												<li><a href="instructor-single">Instructors Single</a></li>
-												<li><a href="login-register">Login &amp; Register</a></li>
+												<li><a href="<?=url::to(['index/aboutus'])?>">About us</a></li>
+												<li><a href="<?=url::to(['index/forum'])?>">Forum Page</a></li>
+												<li><a href="<?=url::to(['index/instructorslist'])?>">Instructors List</a></li>
+												<li><a href="<?=url::to(['index/loginregister'])?>">Login &amp; Register</a></li>
 											</ul>
 										</li>
 										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-											<ul class="dropdown-menu">
-												<li><a href="blog">Blog List</a></li>
-												<li><a href="blog-single">Blog Single</a></li>
-											</ul>
+											<a href="<?=url::to(['index/blog'])?>" class="dropdown-toggle" >Blog</a>
 										</li>
 										<li class="dropdown">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 											<ul class="dropdown-menu">
-												<li><a href="shop">Shop List</a></li>
-												<li><a href="single-product">Shop Single</a></li>
-												<li><a href="cartage">Cart Page</a></li>
-												<li><a href="checkout">Checkout</a></li>
+												<li><a href="<?=url::to(['index/shop'])?>">Shop List</a></li>
+												<li><a href="<?=url::to(['index/cartage'])?>">Cart Page</a></li>
+												<li><a href="<?=url::to(['index/checkout'])?>">Checkout</a></li>
 											</ul>
 										</li>
-										<li><a href="contact">coNTACT</a></li>
+										<li><a href="<?=url::to(['index/contact'])?>">CONTACT</a></li>
 									</ul>
 								</div>
 								<!-- navbar form -->
@@ -275,9 +259,9 @@ Sayt2Asset::register($this);
 		<!-- back top of the page -->
 		<span id="back-top" class="text-center fa fa-caret-up"></span>
 		<!-- loader of the page -->
-		<div id="loader" class="loader-holder">
-			<div class="block"><img src="images/svg/hearts.svg" width="100" alt="loader"></div>
-		</div>
+		<!-- <div id="loader" class="loader-holder">
+			<div class="block"><img src="<?=url::to('/images/svg/hearts.svg')?>" width="100" alt="loader"></div>
+		</div> -->
 	</div>
 	<div class="popup-holder">
 		<div id="popup1" class="lightbox-demo">

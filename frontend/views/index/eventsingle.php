@@ -1,10 +1,16 @@
+<?php
+
+use yii\helpers\Url;
+
+?>
+
 <div id="two-columns" class="container">
 	<div class="row">
 		<!-- content -->
 		<article id="content" class="col-xs-12 col-md-9">
 			<!-- visualImageHolder -->
 			<div class="aligncenter visualImag	eHolder">
-				<img src="http://placehold.it/828x430" alt="image description">
+				<img src="<?=Url::to('/backend/web/photos/'.$reja->img)?>" alt="image description">
 				<!-- captionAddress -->
 				<!-- <address class="captionAddress bg-theme">
 					<div class="addressColumn">
@@ -26,14 +32,9 @@
 					</div>
 				</address> -->
 			</div>
-			<h1>WordPress Theme Development with Boostrap</h1>
+			<h1><?=$reja->title?></h1>
 			<h3 class="content-h3">Event Description</h3>
-			<p>Numbers say it all. Globally, progress in the wind sector continues to be strong with increasing annual
-				installed capacity and growing investment in the sector. In 2015 alone, 63,013 megawatts of wind power
-				capacity was installed globally an annual market growth of 22 percent. It is continuing its progress
-				towards becoming a mainstream, competitive and reliable power source in both developing and mature
-				markets. In fact, wind is becoming cheap enough in many places in the U.S. and around the world to
-				compete effectively with fossil fuels.</p>
+			<p><?=$reja->content?></p>
 			<!-- ticketsInfoAside -->
 			<aside class="ticketsInfoAside bg-dark">
 				<!-- ticketsInfoList -->
@@ -48,7 +49,7 @@
 			</aside>
 			<h3 class="content-h3">Event Content</h3>
 			<!-- eventContentTabsWrap -->
-			<div class="eventContentTabsWrap">
+			<!-- <div class="eventContentTabsWrap">
 				<ul class="nav nav-tabs no-shrink font-lato" role="tablist">
 					<li role="presentation" class="active"><a href="#DiscussAbout" aria-controls="DiscussAbout"
 							role="tab" data-toggle="tab">Discuss About</a></li>
@@ -80,11 +81,10 @@
 			</div>
 			<p>Thomas Edison may have been behind the invention of the electric light bulb, but he did not work Edison
 				work along side partners, both financial and commercial, to get his inventions.</p>
-			<!-- mapHolder -->
+			mapHolder -->
 			<div class="mapHolder">
-				<span class="mapMarker"><img src="images/map-marker.png" alt="marker"></span>
-				<iframe
-					src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d13607.729903367896!2d74.30893281977539!3d31.498539800000007!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1530737870558"
+				<span class="mapMarker"><img src="<?=url::to('/images/map-marker.png')?>" alt="marker"></span>
+				<iframe	src="<?=$reja->location?>"
 					style="border:0" allowfullscreen="" width="100%" height="300" frameborder="0"></iframe>
 			</div>
 			<div class="bookmarkFoot">

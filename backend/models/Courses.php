@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use app\models\Coursescategory;
+use common\models\User;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\helpers\ArrayHelper;
@@ -31,7 +32,7 @@ class Courses extends \yii\db\ActiveRecord
     {
         return [
             [['category_id',  'price'], 'integer'],
-            [['content'], 'string'],
+            [['content','duration','hours'], 'string'],
             [['category_id', 'price', 'title', 'img','content','instruktor'], 'required'],
         ];
     }
@@ -62,5 +63,10 @@ class Courses extends \yii\db\ActiveRecord
     public function getCategory(){
         return $this->hasOne(Coursescategory::class,['id'=>'category_id']);
     }
+    public function getInstruktor2(){
+        return $this->hasOne(User::class,['id'=>'instruktor']);
+    }
+
+
 
 }

@@ -1,10 +1,18 @@
 
 <?php
 
-use app\models\Photos;
+use backend\models\Courses;
+use backend\models\User;
 use yii\helpers\Url;
+use common\models\Rejalar;
 use common\models\Slider;
 $sliders = Slider::find()->all();
+$events = Rejalar::find()->limit(3)->all();
+
+$kurslarSoni = count(Courses::find()->all());
+$oqituvchilarSoni = count(User::find()->where('type=2')->all());
+$oquvchilarSoni = count(User::find()->where('type=3')->all());
+
 ?>
 <!-- intro block -->
 <section class="intro-block">
@@ -90,7 +98,7 @@ $sliders = Slider::find()->all();
 									<div class="alignleft rounded-circle no-shrink">
 										<a href="instructor-single.html"><img src="https://picsum.photos/35/35" class="rounded-circle" alt="image description"></a>
 									</div>
-									<h4 class="author-heading"><a href="<?=url::to(['i'])?>"><?=$course->instruktor?></a></h4>
+									<h4 class="author-heading"><a href="<?=url::to(['instructorsingle','id'=>$course->instruktor2->id])?>"><?=$course->instruktor2->name?></a></h4>
 								</div>
 								<footer class="post-foot gutter-reset">
 									<ul class="list-unstyled post-statuses-list">
@@ -127,28 +135,28 @@ $sliders = Slider::find()->all();
 			<div class="container align-wrap">
 				<div class="align">
 					<div class="row">
-						<div class="col-xs-12 col-sm-3 col">
+						<!-- <div class="col-xs-12 col-sm-3 col">
 							<h2 class="counter-aside-heading">
 								<strong class="countdown element-block">150</strong>
 								<strong class="text element-block">COUNTRIES REACHED</strong>
 							</h2>
-						</div>
-						<div class="col-xs-12 col-sm-3 col">
+						</div> -->
+						<div class="col-xs-12 col-sm-4 col">
 							<h2 class="counter-aside-heading">
-								<strong class="countdown element-block">28000</strong>
-								<strong class="text element-block">PASSED GRADUATES</strong>
+								<strong class="countdown element-block"><?=$oquvchilarSoni?></strong>
+								<strong class="text element-block">O'quvchilar soni</strong>
 							</h2>
 						</div>
-						<div class="col-xs-12 col-sm-3 col">
+						<div class="col-xs-12 col-sm-4 col">
 							<h2 class="counter-aside-heading">
-								<strong class="countdown element-block">750</strong>
-								<strong class="text element-block">QUALIFIED STAFF</strong>
+								<strong class="countdown element-block"><?=$oqituvchilarSoni?></strong>
+								<strong class="text element-block">O'qituvchilar soni</strong>
 							</h2>
 						</div>
-						<div class="col-xs-12 col-sm-3 col">
+						<div class="col-xs-12 col-sm-4 col">
 							<h2 class="counter-aside-heading">
-								<strong class="countdown element-block">1200</strong>
-								<strong class="text element-block">COURSES PUBLISHED</strong>
+								<strong class="countdown element-block"><?=$kurslarSoni?></strong>
+								<strong class="text element-block">Nash qilinga kurslar</strong>
 							</h2>
 						</div>
 					</div>
@@ -159,64 +167,33 @@ $sliders = Slider::find()->all();
 		<section class="upcoming-events-block container">
 			<header class="block-header">
 				<div class="pull-left">
-					<h2 class="block-header-heading">Upcoming Events</h2>
-					<p>Recent and upcoming educational events listed here</p>
+					<h2 class="block-header-heading">Kelgusi voqealar</h2>
+					<p>Oxirgi va boʻlajak taʼlim tadbirlari bu yerda keltirilgan</p>
 				</div>
-				<a href="event-list.html" class="btn btn-default text-uppercase pull-right">View More</a>
+				<a href="<?=url::to(["index/eventslist"])?>" class="btn btn-default text-uppercase pull-right">KO'PROQ KO'RISH</a>
 			</header>
 			<!-- upcoming events list -->
 			<ul class="list-unstyled upcoming-events-list">
-				<li>
+			<?php 
+			foreach($events as $event){ ?>
+			<li>
 					<div class="alignright">
-						<img src="https://picsum.photos/220/130" alt="image description">
+						<img src="<?=url::to('/backend/web/photos/'.$event->img)?>" alt="image description">
 					</div>
 					<div class="alignleft">
 						<time datetime="2011-01-12" class="time text-uppercase">
-							<strong class="date fw-normal">01</strong>
-							<strong class="month fw-light font-lato">march</strong>
-							<strong class="day fw-light font-lato">WEDNESDAY</strong>
+							<strong class="date fw-normal"><?=date('d',$event->hour)?></strong>
+							<strong class="month fw-light font-lato"><?=date('F',$event->hour)?></strong>
+							<strong class="day fw-light font-lato"><?=date('l',$event->hour)?></strong>
 						</time>
 					</div>
 					<div class="description-wrap">
-						<h3 class="list-heading"><a href="event-sigle.html">WordPress Theme Development with Bootstrap</a></h3>
-						<address><time datetime="2011-01-12">8:00 am - 5:00 pm</time> | Great Russell Street, WC1B 3DG UK</address>
-						<a href="event-sigle.html" class="btn btn-default text-uppercase">register</a>
+						<h3 class="list-heading"><a href="<?=url::to(["index/eventsingle",'id'=>$event->id])?>"><?=$event->title?></a></h3>
+						<address><?=$event->subtitle?></address>
+						<a href="<?=url::to(["index/eventsingle",'id'=>$event->id])?>" class="btn btn-default text-uppercase">register</a>
 					</div>
 				</li>
-				<li>
-					<div class="alignright">
-						<img src="https://picsum.photos/220/130" alt="image description">
-					</div>
-					<div class="alignleft">
-						<time datetime="2011-01-12" class="time text-uppercase">
-							<strong class="date fw-normal">05</strong>
-							<strong class="month fw-light font-lato">march</strong>
-							<strong class="day fw-light font-lato">SATURDAY</strong>
-						</time>
-					</div>
-					<div class="description-wrap">
-						<h3 class="list-heading"><a href="event-sigle.html">Build Apps with React Native</a></h3>
-						<address><time datetime="2011-01-12">12:00 pm - 5:00 pm</time> | No1 Warehouse London, UK</address>
-						<a href="event-sigle.html" class="btn btn-default text-uppercase">register</a>
-					</div>
-				</li>
-				<li>
-					<div class="alignright">
-						<img src="https://picsum.photos/220/130" alt="image description">
-					</div>
-					<div class="alignleft">
-						<time datetime="2011-01-12" class="time text-uppercase">
-							<strong class="date fw-normal">13</strong>
-							<strong class="month fw-light font-lato">march</strong>
-							<strong class="day fw-light font-lato">Thursday</strong>
-						</time>
-					</div>
-					<div class="description-wrap">
-						<h3 class="list-heading"><a href="event-sigle.html">Free Yoga &amp; Excercise Class at Every Morning</a></h3>
-						<address><time datetime="2011-01-12">4:00 pm - 8:00 pm</time> | 21 New Globe Walk London, UK</address>
-						<a href="event-sigle.html" class="btn btn-default text-uppercase">register</a>
-					</div>
-				</li>
+					<?php  } ?>
 			</ul>
 		</section>
 		<!-- course search aside -->

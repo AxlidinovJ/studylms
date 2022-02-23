@@ -7,6 +7,10 @@ $params = array_merge(
 );
 
 return [
+    'name'=>"Jamshidbek Axlidinov",
+    'layout'=>'main',
+    'language'=>'uz',
+    'defaultRoute'=>'dashboard/index',
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
@@ -35,16 +39,16 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'dashboard/error',
         ],
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];

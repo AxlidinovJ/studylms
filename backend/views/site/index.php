@@ -1,8 +1,7 @@
 <?php
 
-/** @var yii\web\View $this */
+$this->title = 'Site';
 
-$this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 

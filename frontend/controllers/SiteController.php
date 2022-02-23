@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Instruktor;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -21,9 +22,8 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+   public $layout = "main2";
+
     public function behaviors()
     {
         return [
@@ -156,9 +156,10 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+    
             return $this->goHome();
         }
-
+       
         return $this->render('signup', [
             'model' => $model,
         ]);

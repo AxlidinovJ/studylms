@@ -26,7 +26,7 @@ $this->params['title'] = $this->title;
 										</div>
 										<div class="description-wrap">
 											<h2 class="author-heading"><a href="#">Instructor</a></h2>
-											<h3 class="author-heading-subtitle text-uppercase"><?=$courses->instruktor?></h3>
+											<h3 class="author-heading-subtitle text-uppercase"><?=$courses->instruktor2->name?></h3>
 										</div>
 									</div>
 								</div>

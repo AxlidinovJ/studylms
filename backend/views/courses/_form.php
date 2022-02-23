@@ -24,7 +24,9 @@ $categorys = ArrayHelper::map($category,'id','title');
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'instruktor')->textInput() ?>
+    <?= $form->field($model, 'duration')->textInput() ?>
+    
+    <?= $form->field($model, 'hours')->textInput() ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 
