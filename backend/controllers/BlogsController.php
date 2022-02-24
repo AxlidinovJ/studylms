@@ -4,9 +4,12 @@ namespace backend\controllers;
 
 use common\models\Blogs;
 use backend\models\BlogsSearch;
+use Yii;
+use yii\base\Security;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * BlogsController implements the CRUD actions for Blogs model.
@@ -70,13 +73,19 @@ class BlogsController extends Controller
         $model = new Blogs();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $rasm = UploadedFile::getInstance($model,'img');
+                $random = new Security();
+                $nomi = $random->generateRandomString(32).".".$rasm->extension;
+                $rasm->saveAs("images/blogs/".$nomi);
+                $model->img = $nomi;
+                $model->save();
             }
+            return $this->redirect(['view', 'id' => $model->id]);
+
         } else {
             $model->loadDefaultValues();
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -93,8 +102,20 @@ class BlogsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $nomi = $model->img; 
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $rasm = UploadedFile::getInstance($model,'img');
+                if($rasm){
+                    unlink("images/blogs/".$nomi);
+                    $random = new Security();
+                    $nomi = $random->generateRandomString(32).".".$rasm->extension;
+                    $rasm->saveAs("images/blogs/".$nomi);
+                }
+                $model->img = $nomi;
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

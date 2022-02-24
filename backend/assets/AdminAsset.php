@@ -16,6 +16,7 @@ class AdminAsset extends AssetBundle
         'bower_components/jvectormap/jquery-jvectormap.css',
         'dist/css/AdminLTE.min.css',
         'dist/css/skins/_all-skins.min.css',
+        'css/jk.css',
     
     ];
     public $js = [
@@ -31,7 +32,7 @@ class AdminAsset extends AssetBundle
     'bower_components/chart.js/Chart.js',
     'dist/js/pages/dashboard2.js',
     'dist/js/demo.js',
-
+    'js/jk.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

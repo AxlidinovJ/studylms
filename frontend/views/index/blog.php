@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Url;
+
 $this->title  = "Instructors";
 $this->params['title'] = $this->title; 
 $this->params['breadscrumb'] = $this->title;
@@ -9,121 +12,29 @@ $this->params['breadscrumb'] = $this->title;
     <div class="row">
         <!-- content -->
         <section id="content" class="col-xs-12 col-md-9">
-            <!-- blogPost -->
-            <article class="blogPost">
+
+        <?php foreach($blogs as $blog): ?>
+        <article class="blogPost">
                 <time datetime="2011-01-12" class="timeStamp font-lato text-center text-uppercase">
-                    <strong class="date fw-normal element-block">24</strong>
-                    <span class="element-block">mar</span>
-                    <span class="element-block">2017</span>
+                    <strong class="date fw-normal element-block"><?=date('d',$blog->created_at)?></strong>
+                    <span class="element-block"><?=date('M',$blog->created_at)?></span>
+                    <span class="element-block"><?=date('Y',$blog->created_at)?></span>
                 </time>
                 <div class="aligncenter">
-                    <img src="http://placehold.it/748x430" alt="image description">
+                    <img src="<?=Url::to("/backend/web/images/blogs/".$blog->img)?>" alt="image description">
                 </div>
-                <h1>Your one stop Solution for Development Needs</h1>
+                <h1><?=$blog->title?></h1>
                 <!-- postActionsInfo -->
                 <ul class="list-unstyled postActionsInfo text-uppercase">
-                    <li><a href="#"><i class="far fa-user icn"></i> by Sweden Amith</a></li>
-                    <li><a href="#"><i class="far fa-folder icn"></i> Audio, Music</a></li>
+                <li><a href="#"><i class="far fa-user icn"></i> by <?=$blog->username->name?></a></li>
+                    <li><a href="#"><i class="far fa-folder icn"></i> <?=$blog->category->blog_name?></a></li>
                     <li><a href="#"><i class="far fa-comment icn"></i> 3 Comments</a></li>
                 </ul>
-                <p>Monocle ipsum dolor sit amet iconic Nord craftsmanship soft power the highest quality To efficient
-                    Zürich AsianotePacific Zürich the best quality of life Melbourne Shinkansen vibrant, St Moritz
-                    signature pintxos tans Swiss essential airport flat white elegant bulletin charming Gaggenau
-                    first-class lovely perfect hub Flat white Ettinger business class Star Moritz boutique Gaggenau…</p>
-                <a href="#" class="btn btn-default text-uppercase">Read More</a>
+                <p><?=substr($blog->content,0,500)?>…</p>
+                <a href="<?=url::to(['/index/blogsingle','id'=>$blog->id])?>" class="btn btn-default text-uppercase">Read More</a>
             </article>
-            <!-- blogPost -->
-            <article class="blogPost">
-                <time datetime="2011-01-12" class="timeStamp font-lato text-center text-uppercase">
-                    <strong class="date fw-normal element-block">24</strong>
-                    <span class="element-block">mar</span>
-                    <span class="element-block">2017</span>
-                </time>
-                <div class="aligncenter">
-                    <img src="http://placehold.it/748x430" alt="image description">
-                </div>
-                <h1>Learn English Connect with the world</h1>
-                <!-- postActionsInfo -->
-                <ul class="list-unstyled postActionsInfo text-uppercase">
-                    <li><a href="#"><i class="far fa-user icn"></i> by Sweden Amith</a></li>
-                    <li><a href="#"><i class="far fa-folder icn"></i> Audio, Music</a></li>
-                    <li><a href="#"><i class="far fa-comment icn"></i> 3 Comments</a></li>
-                </ul>
-                <p>Monocle ipsum dolor sit amet iconic Nord craftsmanship soft power the highest quality To efficient
-                    Zürich AsianotePacific Zürich the best quality of life Melbourne Shinkansen vibrant, St Moritz
-                    signature pintxos tans Swiss essential airport flat white elegant bulletin charming Gaggenau
-                    first-class lovely perfect hub Flat white Ettinger business class Star Moritz boutique Gaggenau…</p>
-                <a href="#" class="btn btn-default text-uppercase">Read More</a>
-            </article>
-            <!-- blogPost -->
-            <article class="blogPost">
-                <time datetime="2011-01-12" class="timeStamp font-lato text-center text-uppercase">
-                    <strong class="date fw-normal element-block">24</strong>
-                    <span class="element-block">mar</span>
-                    <span class="element-block">2017</span>
-                </time>
-                <div class="aligncenter">
-                    <img src="http://placehold.it/748x430" alt="image description">
-                </div>
-                <h1>Tricks and Tips for Adobe Photoshopcc</h1>
-                <!-- postActionsInfo -->
-                <ul class="list-unstyled postActionsInfo text-uppercase">
-                    <li><a href="#"><i class="far fa-user icn"></i> by Sweden Amith</a></li>
-                    <li><a href="#"><i class="far fa-folder icn"></i> Audio, Music</a></li>
-                    <li><a href="#"><i class="far fa-comment icn"></i> 3 Comments</a></li>
-                </ul>
-                <p>Monocle ipsum dolor sit amet iconic Nord craftsmanship soft power the highest quality To efficient
-                    Zürich AsianotePacific Zürich the best quality of life Melbourne Shinkansen vibrant, St Moritz
-                    signature pintxos tans Swiss essential airport flat white elegant bulletin charming Gaggenau
-                    first-class lovely perfect hub Flat white Ettinger business class Star Moritz boutique Gaggenau…</p>
-                <a href="#" class="btn btn-default text-uppercase">Read More</a>
-            </article>
-            <!-- blogPost -->
-            <article class="blogPost">
-                <time datetime="2011-01-12" class="timeStamp font-lato text-center text-uppercase">
-                    <strong class="date fw-normal element-block">24</strong>
-                    <span class="element-block">mar</span>
-                    <span class="element-block">2017</span>
-                </time>
-                <div class="aligncenter">
-                    <img src="http://placehold.it/748x430" alt="image description">
-                </div>
-                <h1>Audio Editing Basics with Reaper</h1>
-                <!-- postActionsInfo -->
-                <ul class="list-unstyled postActionsInfo text-uppercase">
-                    <li><a href="#"><i class="far fa-user icn"></i> by Sweden Amith</a></li>
-                    <li><a href="#"><i class="far fa-folder icn"></i> Audio, Music</a></li>
-                    <li><a href="#"><i class="far fa-comment icn"></i> 3 Comments</a></li>
-                </ul>
-                <p>Monocle ipsum dolor sit amet iconic Nord craftsmanship soft power the highest quality To efficient
-                    Zürich AsianotePacific Zürich the best quality of life Melbourne Shinkansen vibrant, St Moritz
-                    signature pintxos tans Swiss essential airport flat white elegant bulletin charming Gaggenau
-                    first-class lovely perfect hub Flat white Ettinger business class Star Moritz boutique Gaggenau…</p>
-                <a href="#" class="btn btn-default text-uppercase">Read More</a>
-            </article>
-            <!-- blogPost -->
-            <article class="blogPost">
-                <time datetime="2011-01-12" class="timeStamp font-lato text-center text-uppercase">
-                    <strong class="date fw-normal element-block">24</strong>
-                    <span class="element-block">mar</span>
-                    <span class="element-block">2017</span>
-                </time>
-                <div class="aligncenter">
-                    <img src="http://placehold.it/748x430" alt="image description">
-                </div>
-                <h1>Online Learning students council meeting</h1>
-                <!-- postActionsInfo -->
-                <ul class="list-unstyled postActionsInfo text-uppercase">
-                    <li><a href="#"><i class="far fa-user icn"></i> by Sweden Amith</a></li>
-                    <li><a href="#"><i class="far fa-folder icn"></i> Audio, Music</a></li>
-                    <li><a href="#"><i class="far fa-comment icn"></i> 3 Comments</a></li>
-                </ul>
-                <p>Monocle ipsum dolor sit amet iconic Nord craftsmanship soft power the highest quality To efficient
-                    Zürich AsianotePacific Zürich the best quality of life Melbourne Shinkansen vibrant, St Moritz
-                    signature pintxos tans Swiss essential airport flat white elegant bulletin charming Gaggenau
-                    first-class lovely perfect hub Flat white Ettinger business class Star Moritz boutique Gaggenau…</p>
-                <a href="#" class="btn btn-default text-uppercase">Read More</a>
-            </article>
+
+        <?php endforeach;?>
             
             <nav aria-label="Page navigation">
                 <!-- pagination -->
@@ -138,7 +49,7 @@ $this->params['breadscrumb'] = $this->title;
                 </ul>
             </nav>
         </section>
-        <!-- sidebar -->
+
         <aside class="col-xs-12 col-md-3" id="sidebar">
             <!-- widget search -->
             <section class="widget widget_search">

@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 
+
 /**
  * This is the model class for table "blog_category".
  *
@@ -22,9 +23,8 @@ class BlogCategory extends \yii\db\ActiveRecord
         return 'blog_category';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
+
     public function rules()
     {
         return [

@@ -101,7 +101,11 @@ SaytAsset::register($this);
 												<li><a href="<?=url::to(['index/aboutus'])?>">About us</a></li>
 												<li><a href="<?=url::to(['index/forum'])?>">Forum Page</a></li>
 												<li><a href="<?=url::to(['index/instructorslist'])?>">Instructors List</a></li>
-												<li><a href="<?=url::to(['index/loginregister'])?>">Login &amp; Register</a></li>
+												<?php if(Yii::$app->user->isGuest){?>
+												<li><a href="<?=url::to(['site/login'])?>">Login</a></li>
+												<li><a href="<?=url::to(['site/signup'])?>">Register</a></li>
+												<?php } ?>
+
 											</ul>
 										</li>
 										<li class="dropdown">
@@ -116,6 +120,9 @@ SaytAsset::register($this);
 											</ul>
 										</li>
 										<li><a href="<?=url::to(['index/contact'])?>">CONTACT</a></li>
+										<?php if(!Yii::$app->user->isGuest){?>
+										<li><a href="<?=url::to(['site/logout'])?>">Chiqish {<?=yii::$app->user->identity->username?>}</a></li>
+										<?php } ?>
 									</ul>
 								</div>
 								<!-- navbar form -->

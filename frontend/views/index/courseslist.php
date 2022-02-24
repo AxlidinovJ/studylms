@@ -1,6 +1,9 @@
 <?php
 use app\models\Coursescategory;
+use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
+use yii\widgets\ListView;
+
 $this->title = "Cours list";
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = $this->title;
@@ -13,71 +16,40 @@ $categorys = Coursescategory::find()->all();
 					<!-- content -->
 					<article id="content" class="col-xs-12 col-md-9">
 						<!-- show head -->
-						<header class="show-head">
+						<!-- <header class="show-head">
 							<p> Showing 1–9 of 15 results</p>
 							<select  class="chosen-select-no-single">
 								<?php foreach($categorys as $categry){ ?>
 								<option value="<?=$categry->id?>"><?=$categry->title?></option>
 								<?php } ?>
 							</select>
-						</header>
+						</header> -->
 						<div class="row flex-wrap">
-							<?php foreach($courses as $course){?>
-							<div class="col-xs-12 col-sm-6 col-lg-4">
-								<!-- popular post -->
-								<article class="popular-post">
-								<div class="aligncenter">
-									<img src="<?=url::to("/backend/web/photos/".$course->img)?>" alt="image description">
-								</div>
-								<div>
-									<strong class="bg-primary text-white font-lato text-uppercase price-tag">$<?=$course->price?></strong>
-								</div>
-								<h3 class="post-heading"><a href="<?=url::to(['coursesingle','id'=>$course->id])?>"><?=$course->title?></a></h3>
-								<div class="post-author">
-									<div class="alignleft rounded-circle no-shrink">
-										<a href="instructor-single.html"><img src="https://picsum.photos/35/35" class="rounded-circle" alt="image description"></a>
-									</div>
-									<h4 class="author-heading"><a href="<?=url::to(['instructorsingle','id'=>$course->instruktor2->id])?>"><?=$course->instruktor2->name?></a></h4>
-								</div>
-								<footer class="post-foot gutter-reset">
-									<ul class="list-unstyled post-statuses-list">
-										<li>
-											<a href="#">
-												<span class="fas icn fa-users no-shrink"><span class="sr-only">users</span></span>
-												<strong class="text fw-normal">98</strong>
-											</a>
-										</li>
-										<li>
-											<a href="#">
-												<span class="fas icn no-shrink fa-comments"><span class="sr-only">comments</span></span>
-												<strong class="text fw-normal">10</strong>
-											</a>
-										</li>
-									</ul>
-									<ul class="star-rating list-unstyled">
-										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-									</ul>
-								</footer>
-							</article>
-							</div>
-							<?php } ?>
+							
+
+						<?php
+							echo ListView::widget([
+								'dataProvider' => $courses,
+								'itemView' => '_item',
+								'layout' => "'<div class='row'>{items}</div>\n'",
+								'itemOptions' => [
+									'tag' => false
+								]
+							]);
+					?>
+
 						</div>
-						<nav aria-label="Page navigation">
-							<!-- pagination -->
-							<ul class="pagination">
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">2</a></li>
-								<li>
-									<a href="#" aria-label="Next">
-										<span aria-hidden="true">&rsaquo;</span>
-									</a>
-								</li>
-							</ul>
-						</nav>
+					
+						<?php
+						echo LinkPager::widget([
+							'pagination' => $courses->pagination,
+							'options' => [
+									'class' => 'page-numbers'
+							],
+							'disableCurrentPageButton' => true
+						]);
+           			 ?>
+
 					</article>
 					<!-- sidebar -->
 					<aside class="col-xs-12 col-md-3" id="sidebar">
@@ -85,7 +57,7 @@ $categorys = Coursescategory::find()->all();
 						<section class="widget widget_search">
 							<h3>Course Search</h3>
 							<!-- search form -->
-							<form action="#" class="search-form">
+							<form class="search-form">
 								<fieldset>
 									<input placeholder=" Search&hellip;" class="form-control" name="s" type="search">
 									<button type="button" class="fas fa-search"><span class="sr-only">search</span></button>

@@ -1,11 +1,13 @@
 <?php
 
+use common\models\BlogCategory;
+use phpDocumentor\Reflection\Types\Array_;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Blogs */
-/* @var $form yii\widgets\ActiveForm */
+
+$category = ArrayHelper::map(BlogCategory::find()->all(),'id','blog_name');
 ?>
 
 <div class="blogs-form">
@@ -14,19 +16,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->label("Categoriya nomi")->dropDownList($category,['prompt'=>"Tanlang"]) ?>
 
-    <?= $form->field($model, 'img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'img')->fileInput() ?>
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

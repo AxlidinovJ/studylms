@@ -120,6 +120,7 @@ class RejalarController extends Controller
             if ($model->load($this->request->post())) {
                 $rasm = UploadedFile::getInstance($model,'img');
                 if($rasm){
+                    unlink("photos/".$nomi);
                     $random = new Security();
                     $nomi = $random->generateRandomString(32).".".$rasm->extension;
                     $rasm->saveAs("photos/".$nomi);

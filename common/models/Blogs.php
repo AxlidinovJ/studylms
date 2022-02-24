@@ -2,23 +2,13 @@
 
 namespace common\models;
 
+use backend\models\User;
 use Yii;
 
-/**
- * This is the model class for table "blogs".
- *
- * @property int $id
- * @property string $title
- * @property int $category_id
- * @property string $img
- * @property string $content
- * @property int $created_at
- * @property int $updated_at
- * @property int $created_by
- * @property int $updated_by
- *
- * @property BlogCategory $category
- */
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+
+
 class Blogs extends \yii\db\ActiveRecord
 {
     /**
@@ -29,13 +19,18 @@ class Blogs extends \yii\db\ActiveRecord
         return 'blogs';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function behaviors()
+    {
+        return [
+          TimestampBehavior::class,
+          BlameableBehavior::class
+        ];
+    }
+
     public function rules()
     {
         return [
-            [['title', 'category_id', 'img', 'content', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['title', 'category_id', 'img', 'content'], 'required'],
             [['category_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['content'], 'string'],
             [['title', 'img'], 'string', 'max' => 255],
@@ -69,5 +64,14 @@ class Blogs extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(BlogCategory::className(), ['id' => 'category_id']);
+    }
+
+    public function getUsername()
+    {
+        return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+    public function getUsername2()
+    {
+        return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
 }

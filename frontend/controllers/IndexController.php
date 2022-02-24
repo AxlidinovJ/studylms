@@ -4,8 +4,10 @@ namespace frontend\controllers;
 
 use backend\models\Courses;
 use backend\models\User;
+use common\models\Blogs;
 use common\models\Rejalar;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 
@@ -28,10 +30,22 @@ class IndexController extends Controller
     
 
 
-    public function actionCourseslist()
+    public function actionCourseslist($s = null)
     {
         $this->layout = "main2";
-        $courses = Courses::find()->all();
+        $courses = new ActiveDataProvider([
+            'query' => Courses::find()->filterWhere(['like','title',$s]),
+            'pagination' => [
+                'pageSize' => 6
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+        ]);
+
+
         return $this->render('courseslist',['courses'=>$courses]);
     }
 
@@ -95,19 +109,22 @@ class IndexController extends Controller
     public function actionInstructorslist()
     {
         $this->layout = "main2";
-        return $this->render('instructorslist');
+        $users = User::find()->where('type=2')->orderBy('created_at DESC')->all();
+        return $this->render('instructorslist',['users'=>$users]);
     }
     
 
     public function actionBlog()
     {
         $this->layout = "main2";
-        return $this->render('blog');
+        $blogs = Blogs::find()->orderBy('created_at DESC')->all();
+        return $this->render('blog',['blogs'=>$blogs]);
     }
-    public function actionBlogsingle()
+    public function actionBlogsingle($id)
     {
         $this->layout = "main2";
-        return $this->render('blogsingle');
+        $blog = Blogs::findOne($id);
+        return $this->render('blogsingle',['blog'=>$blog]);
     }
 
     public function actionLoginregister()

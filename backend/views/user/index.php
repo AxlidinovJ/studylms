@@ -50,7 +50,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'=>'html',
                 'attribute'=>'status',
                 'value'=>function($data){
-                    return $data->status==10?"<span class='text-success bg-primary'>Aktiv</span>":"<span class='text-success bg-danger'>Aktiv emas<span>";
+                    if($data->status==10){
+                        return "<a href='".url::to(['site/status','id'=>$data->id])."' title='Aktivsizlantirish' class='text-success bg-primary status'>Aktiv</a>";
+                    }else{
+                        return "<a href='".url::to(['site/status','id'=>$data->id])."' class='text-success bg-danger status' title='Aktivlashtirish'>Aktiv emas</a>";
+                    }
                 }
             ],
             // 'created_at',

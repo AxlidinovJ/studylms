@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Blogs;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -28,14 +29,39 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'title',
-            'category_id',
-            'img',
-            'content:ntext',
+            // 'category_id',
+            [
+                'attribute'=>'category_id',
+                'value'=>function($data){
+                    return $data->category->blog_name;
+                }
+            ],
+            // 'img',
+            [
+                'attribute'=>'img',
+                'format'=>'html',
+                'value'=>function($data){
+                    return Html::img('/backend/web/images/blogs/'.$data->img,['width'=>'100px']);
+                }
+            ],
+            // 'content:ntext',
             //'created_at',
+            [
+                'attribute'=>'created_at',
+                'value'=>function($data){
+                    return date('d-M Y',$data->created_at);
+                }
+            ],
             //'updated_at',
             //'created_by',
+            [
+                'attribute'=>'created_by',
+                'value'=>function($data){
+                    return $data->username->username;
+                }
+            ],
             //'updated_by',
             [
                 'class' => ActionColumn::className(),

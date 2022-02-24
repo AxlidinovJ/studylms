@@ -1,7 +1,8 @@
 <?php
-$this->title  = "Instructors";
+$this->title  = "Blog singls";
 $this->params['title'] = $this->title; 
 $this->params['breadscrumb'] = $this->title;
+use yii\helpers\Url;
 ?>
 
 <div id="two-columns" class="container">
@@ -11,62 +12,18 @@ $this->params['breadscrumb'] = $this->title;
             <!-- blogPost -->
             <article class="blogPost single">
                 <div class="aligncenter">
-                    <img src="http://placehold.it/828x430" alt="image description">
+                    <img src="<?=url::to("/backend/web/images/blogs/".$blog->img)?>" alt="image description">
                 </div>
-                <h1>Learn English Connect with the world</h1>
+                <h1><?=$blog->title?></h1>
                 <!-- postActionsInfo -->
                 <ul class="list-unstyled postActionsInfo text-uppercase">
-                    <li><a href="#"><i class="far fa-clock icn"></i> <time datetime="2011-01-12">March 20,
-                                2017</time></a></li>
-                    <li><a href="#"><i class="far fa-user icn"></i> by Sweden Amith</a></li>
-                    <li><a href="#"><i class="far fa-folder icn"></i> Audio, Music</a></li>
+                    <li><a href="#"><i class="far fa-clock icn"></i> <time><?=date('d-M Y',$blog->created_at)?></time></a></li>
+                    <li><a href="#"><i class="far fa-user icn"></i> by <?=$blog->username->name?></a></li>
+                    <li><a href="#"><i class="far fa-folder icn"></i> <?=$blog->category->blog_name?></a></li>
                     <li><a href="#"><i class="far fa-comment icn"></i> 3 Comments</a></li>
                 </ul>
-                <p>Numbers say it all. Globally, progress in the wind sector continues to be strong with increasing
-                    annual installed capacity and growing investment in the sector. In 2015 alone, 63,013 megawatts of
-                    wind power capacity was installed globally an annual market growth of 22 percent. It is continuing
-                    its progress towards becoming a mainstream, competitive and reliable power source in both developing
-                    and mature markets. In fact, wind is becoming cheap enough in many places in the U.S. and around the
-                    world to compete effectively with fossil fuels.</p>
-                <p>As wind energy continues to gain ground, let’s take a look at three main trends we are best seeing in
-                    the thermal power sources and natural gasindustry moving forward:</p>
-                <h3 class="content-h3">1. The Formation of Strategic Partnerships</h3>
-                <p>Thomas Edison may have been behind the invention of the electric light bulb, but he did not work
-                    Edison work along side partners, both financial and commercial, to get his inventions off the
-                    ground, and without these partnerships, the light bulb as we know it today may never have taken.</p>
-                <!-- contentRightImage -->
-                <div class="alignright contentRightImage">
-                    <img src="http://placehold.it/395x320" alt="image description">
-                    <div class="imageCaption text-center text-white">
-                        <p>This infographic explores how Formation</p>
-                    </div>
-                </div>
-                <p>Throughout the wind sector, this type of partnership and collaboration is crucial. Battling
-                    challenging cost targets and the need to build wind power closer to urban areas wind operators must
-                    form long-term strategic collabora tions to maintain and increase wind’s competitive edge
-                    Maintaining a long-term partnership with a supplier or original equipment manufacturer will not only
-                    save time but can also save costs through economies of scale.</p>
-                <p>In fact, wind is becoming cheap enough in many places in the U.S. and around the world to compete
-                    effectively with fossil fuels local economy but manufacturing basis leverl components locally also
-                    helps to eliminate long-distance transport costs, for the large components in particular In fact,
-                    wind is becoming cheap enough in many places in the U.S. and around the world to compete effectively
-                    with fossil fuels. local economy, but manufacturing.</p>
-                <h3 class="content-h3">2. The demand for localization</h3>
-                <p>Thomas Edison may have been behind the invention of the electric light bulb, but he did not work
-                    alone. Edison worked alongside partners, both financial and commercial, to get his inventions off
-                    the ground, and without these partnerships, the light bulb as we know it today may never have taken.
-                    off in the way that it did—and he’s not the only one. Some of the world's most effective business
-                    models and companies have been forged through.</p>
-                <h3 class="content-h3">3. The move towards a more digital future</h3>
-                <p>Thomas Edison may have been behind the invention of the electric light bulb, but he did not work
-                    alone. Edison worked alongside partners, both financial and commercial, to get his inventions off
-                    the ground, and without these partnerships, the light bulb as we know it today may never have taken.
-                    off in the way that it did—and he’s not the only one. Some of the world's most effective business
-                    models and companies have been forged through.</p>
-                <p>Thomas Edison may have been behind the invention of the electric light bulb, but he did not work
-                    alone. Edison worked alongside partners, both financial and commercial, to get his inventions off
-                    the ground, and without these partnerships, the light bulb as we know it today may never have taken.
-                </p>
+                <p><?=$blog->content?></p>
+
                 <div class="bookmarkFoot">
                     <div class="bookmarkCol">
                         <p><strong class="title font-lato">Tags:</strong> <a href="#">Education</a>, <a

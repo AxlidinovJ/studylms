@@ -3,11 +3,13 @@
 
 use backend\models\Courses;
 use backend\models\User;
+use common\models\Blogs;
 use yii\helpers\Url;
 use common\models\Rejalar;
 use common\models\Slider;
 $sliders = Slider::find()->all();
 $events = Rejalar::find()->limit(3)->all();
+$blogs = Blogs::find()->orderBy('created_at DESC')->limit(3)->all();
 
 $kurslarSoni = count(Courses::find()->all());
 $oqituvchilarSoni = count(User::find()->where('type=2')->all());
@@ -391,39 +393,20 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 				<p>Share your work to collaboratve with our vibrant design element.</p>
 			</header>
 			<div class="row">
+				<?php foreach($blogs as $blog){?>
 				<div class="col-xs-12 col-sm-6 col-md-4">
 					<!-- news post -->
 					<article class="news-post">
 						<div class="aligncenter">
-							<a href="blog-single.html"><img src="https://picsum.photos/360/210" alt="image desciption"></a>
+							<a href="<?=url::to(['index/blogsingle','id'=>$blog->id])?>"><img src="<?=url::to("/backend/web/images/blogs/".$blog->img)?>" alt="image desciption"></a>
 						</div>
-						<h3><a href="blog-single.html">Best Educational Psd Template Launching Today</a></h3>
-						<p>Areas tackled in the most fundamental part of medical research include cellu lar and molecular biology&hellip;</p>
-						<time datetime="2011-01-12" class="time text-uppercase text-gray">Mar 05,2017  by <a href="blog-single.html">andrew caset</a></time>
+						<h3><a href="<?=url::to(['index/blogsingle','id'=>$blog->id])?>"><?=$blog->title?></a></h3>
+						<!-- <p><?php //substr($blog->content,0,20)?>...</p> -->
+						<time datetime="2011-01-12" class="time text-uppercase text-gray"><?=date('d-M Y',$blog->created_at)?> by <a href="<?=url::to(['index/blogsingle','id'=>$blog->id])?>"><?=$blog->username->name?></a></time>
 					</article>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<!-- news post -->
-					<article class="news-post">
-						<div class="aligncenter">
-							<a href="blog-single.html"><img src="https://picsum.photos/360/210" alt="image desciption"></a>
-						</div>
-						<h3><a href="blog-single.html">Your one stop Solution for Android Development Needs</a></h3>
-						<p>Areas tackled in the most fundamental part of medical research include cellu lar and molecular biology&hellip;</p>
-						<time datetime="2011-01-12" class="time text-uppercase text-gray">Mar 05,2017  by <a href="blog-single.html">andrew caset</a></time>
-					</article>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4">
-					<!-- news post -->
-					<article class="news-post">
-						<div class="aligncenter">
-							<a href="blog-single.html"><img src="https://picsum.photos/360/210" alt="image desciption"></a>
-						</div>
-						<h3><a href="blog-single.html">Online Learning students council meeting 2017</a></h3>
-						<p>Areas tackled in the most fundamental part of medical research include cellu lar and molecular biology&hellip;</p>
-						<time datetime="2011-01-12" class="time text-uppercase text-gray">Mar 05,2017  by <a href="blog-single.html">andrew caset</a></time>
-					</article>
-				</div>
+				<?php } ?>
+			
 			</div>
 		</section>
 		<!-- subscription aside block -->
