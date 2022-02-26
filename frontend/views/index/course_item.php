@@ -15,7 +15,7 @@ use yii\helpers\Url;
         <h3 class="post-heading"><a href="<?=url::to(['coursesingle','id'=>$model->id])?>"><?=$model->title?></a></h3>
         <div class="post-author">
             <div class="alignleft rounded-circle no-shrink">
-                <a href="instructor-single.html"><img src="https://picsum.photos/35/35" class="rounded-circle"
+                <a href="instructor-single.html"><img src="<?=url::to("/backend/web/images/users/".$model->instruktor2->photo)?>" class="rounded-circle"
                         alt="image description"></a>
             </div>
             <h4 class="author-heading"><a

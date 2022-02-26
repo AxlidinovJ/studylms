@@ -12,6 +12,8 @@ use yii\grid\GridView;
 
 $this->title = 'Courses Categories';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['title'] = 'coursescategory';
+
 ?>
 <div class="courses-category-index">
 

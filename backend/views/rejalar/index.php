@@ -12,6 +12,8 @@ use yii\grid\GridView;
 
 $this->title = 'Rejalars';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['title'] = 'reja';
+
 ?>
 <div class="rejalar-index">
 

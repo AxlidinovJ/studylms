@@ -14,31 +14,9 @@ use yii\web\UploadedFile;
 /**
  * CoursesController implements the CRUD actions for Courses model.
  */
-class CoursesController extends Controller
+class CoursesController extends DefaultController
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                // 'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        // 'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+    
 
 
     public function actionIndex()

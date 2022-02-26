@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="error-content">
         <h3><i class="fa fa-warning text-yellow"></i>Sahifa topilmadi</h3>
         <p>
-        Siz qidirgan sahifani topa olmadik.
+        <?=$name?>
         Ayni paytda siz <a href="<?=Url::home()?>">boshqaruv paneliga qaytishingiz mumkin</a>
         </p>
         <!-- <form class="search-form">

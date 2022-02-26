@@ -30,11 +30,16 @@ class IndexController extends Controller
     
 
 
-    public function actionCourseslist($s = null)
+    public function actionCourseslist($s = null,$category='all')
     {
         $this->layout = "main2";
+        if($category=='all'){
+            $courses = Courses::find()->filterWhere(['like','title',$s]);
+        }else{
+            $courses = Courses::find()->filterWhere(['like','title',$s])->andfilterwhere(['category_id'=>$category]);
+        }
         $courses = new ActiveDataProvider([
-            'query' => Courses::find()->filterWhere(['like','title',$s]),
+            'query' => $courses,
             'pagination' => [
                 'pageSize' => 6
             ],
@@ -44,11 +49,8 @@ class IndexController extends Controller
                 ]
             ],
         ]);
-
-
         return $this->render('courseslist',['courses'=>$courses]);
     }
-
 
 
 
@@ -64,7 +66,21 @@ class IndexController extends Controller
     public function actionEventslist()
     {
         $this->layout = "main2";
-        return $this->render('eventslist');
+        $events0 = Rejalar::find()->where(['>','hour',time()]);
+        
+        $events = new ActiveDataProvider([
+            'query' => $events0,
+            'pagination' => [
+                'pageSize' => 6
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'hour' => SORT_ASC,
+                ]
+            ],
+        ]);
+
+        return $this->render('eventslist',['events'=>$events]);
     }
 
     

@@ -1,6 +1,7 @@
 <?php
 
 $this->title = 'Site';
+$this->params['title'] = 'site';
 
 ?>
 <div class="site-index">

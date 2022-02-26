@@ -8,6 +8,8 @@ use yii\grid\GridView;
 
 $this->title = 'Blog Categories';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['title'] = 'blogcategory';
+
 ?>
 <div class="blog-category-index">
 

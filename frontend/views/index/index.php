@@ -1,14 +1,17 @@
 
 <?php
 
+use app\models\Coursescategory;
 use backend\models\Courses;
 use backend\models\User;
 use common\models\Blogs;
 use yii\helpers\Url;
 use common\models\Rejalar;
 use common\models\Slider;
+use common\models\Xabarlar;
+
 $sliders = Slider::find()->all();
-$events = Rejalar::find()->limit(3)->all();
+$events = Rejalar::find()->where(['>','hour',time()])->orderBy('hour ASC')->limit(3)->all();
 $blogs = Blogs::find()->orderBy('created_at DESC')->limit(3)->all();
 
 $kurslarSoni = count(Courses::find()->all());
@@ -22,7 +25,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 		<?php foreach ($sliders as $slider) { ?>
 				<div>
 					<!-- intro block slide -->
-					<article class="intro-block-slide overlay bg-cover" style="background-image: url(<?=url::to('/backend/web/photos/'.$slider->photo)?>);">
+					<article class="intro-block-slide overlay bg-cover" style="background-image: url(<?=url::to('/backend/web/images/slider/'.$slider->photo)?>);">
 						<div class="align-wrap container">
 							<div class="align">
 								<div class="anim">
@@ -98,7 +101,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 								<h3 class="post-heading"><a href="<?=url::to(['coursesingle','id'=>$course->id])?>"><?=$course->title?></a></h3>
 								<div class="post-author">
 									<div class="alignleft rounded-circle no-shrink">
-										<a href="instructor-single.html"><img src="https://picsum.photos/35/35" class="rounded-circle" alt="image description"></a>
+										<a href="instructor-single.html"><img src="<?=url::to("/backend/web/images/users/".$course->instruktor2->photo)?>" class="rounded-circle" alt="image description"></a>
 									</div>
 									<h4 class="author-heading"><a href="<?=url::to(['instructorsingle','id'=>$course->instruktor2->id])?>"><?=$course->instruktor2->name?></a></h4>
 								</div>
@@ -201,38 +204,30 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 		<!-- course search aside -->
 		<aside class="course-search-aside bg-gray">
 			<!-- course search form -->
-			<form action="#" class="container course-search-form">
+			<form action="<?=url::to(['index/courseslist'])?>" class="container course-search-form">
 				<label class="element-block text-center font-lato">Search For Course</label>
 				<div class="form-holder">
 					<div class="form-row">
 						<div class="form-group">
-							<select data-placeholder="Category" class="chosen-select-no-single">
-								<option value="0">Category</option>
-								<option value="0">Category</option>
-								<option value="0">Category</option>
+							<select data-placeholder="Category" class="chosen-select-no-single" name='category'>
+								<option value="">Hammasi</option>
+								<?php 
+								$category = Coursescategory::find()->all();
+								foreach ($category as $categ) {?>
+									<option value="<?=$categ->id?>"><?=$categ->title?></option>
+								<?php } ?>
 							</select>
 						</div>
 						<div class="form-group">
-							<select data-placeholder="Course Cost" class="chosen-select-no-single">
-								<option value="0">Course Cost</option>
-								<option value="0">Course Cost</option>
-								<option value="0">Course Cost</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select data-placeholder="Search Text" class="chosen-select-no-single">
-								<option value="0">Search Text</option>
-								<option value="0">Search Text</option>
-								<option value="0">Search Text</option>
-							</select>
+							<input type="search" name="s" class="" placeholder="Qidirish" style="border: 0px">
 						</div>
 					</div>
-					<button type="button" class="btn btn-theme btn-warning no-shrink text-uppercase">Search</button>
+					<button type="submit" class="btn btn-theme btn-warning no-shrink text-uppercase">Search</button>
 				</div>
 			</form>
 		</aside>
 		<!-- categories aside -->
-		<aside class="bg-cover categories-aside text-center" style="background-image: url(https://picsum.photos/1920x365);">
+		<aside class="bg-cover categories-aside text-center" style="background-image: url(https://picsum.photos/1920/365);">
 			<div class="container holder">
 				<!-- categories list -->
 				<ul class="list-unstyled categories-list">
@@ -333,53 +328,33 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 						<h2>What People Say</h2>
 						<!-- testimonail slider -->
 						<div class="slick-slider slider testimonail-slider">
+							<?php foreach(Xabarlar::find()->orderBy('created_at DESC')->all() as $xabar){?>
 							<div>
 								<!-- testimonial quote -->
 								<blockquote class="testimonial-quote font-roboto">
-									<p>“ Trent from punchy rollie grab us a waggin school. Flat out like a bludger where he hasn't got a damper. As stands out like brass razoo heaps it'll be relo. As busy as a paddock.”</p>
+									<p>“ <?=$xabar->text?>.”</p>
 									<cite class="element-block font-lato">
 										<span class="avatar rounded-circle element-block">
-											<img class="rounded-circle" src="https://picsum.photos/65/65" alt="Nethor Doct -Developer">
+											<img class="rounded-circle" src="<?=url::to('/backend/web/images/users/'.$xabar->userxabar->photo)?>" alt="Nethor Doct -Developer">
 										</span>
-										<strong class="element-block h5 h">Nethor Doct -<span class="text-gray">Developer</span></strong>
+										<strong class="element-block h5 h"><?=$xabar->userxabar->name?> - <span class="text-gray"><?php
+										switch ($xabar->userxabar->type) {
+											case '1':
+												echo "Admin";
+												break;
+												case '2':
+												echo "Ustoz";
+												break;
+											default:
+											echo "O'qubchi";
+												break;
+										}
+										?></span></strong>
 									</cite>
 								</blockquote>
 							</div>
-							<div>
-								<!-- testimonial quote -->
-								<blockquote class="testimonial-quote font-roboto">
-									<p>“ Trent from punchy rollie grab us a waggin school. Flat out like a bludger where he hasn't got a damper. As stands out like brass razoo heaps it'll be relo. As busy as a paddock.”</p>
-									<cite class="element-block font-lato">
-										<span class="avatar rounded-circle element-block">
-											<img class="rounded-circle" src="https://picsum.photos/65/65" alt="Nethor Doct -Developer">
-										</span>
-										<strong class="element-block h5 h">Nethor Doct -<span class="text-gray">Developer</span></strong>
-									</cite>
-								</blockquote>
-							</div>
-							<div>
-								<!-- testimonial quote -->
-								<blockquote class="testimonial-quote font-roboto">
-									<p>“ Trent from punchy rollie grab us a waggin school. Flat out like a bludger where he hasn't got a damper. As stands out like brass razoo heaps it'll be relo. As busy as a paddock.”</p>
-									<cite class="element-block font-lato">
-										<span class="avatar rounded-circle element-block">
-											<img class="rounded-circle" src="https://picsum.photos/65/65" alt="Nethor Doct -Developer">
-										</span>
-										<strong class="element-block h5 h">Nethor Doct -<span class="text-gray">Developer</span></strong>
-									</cite>
-								</blockquote>
-							</div>
-							<div>
-								testimonial quote
-								<blockquote class="testimonial-quote font-roboto">
-									<p>“ Trent from punchy rollie grab us a waggin school. Flat out like a bludger where he hasn't got a damper. As stands out like brass razoo heaps it'll be relo. As busy as a paddock.”</p>
-									<cite class="element-block font-lato">
-										<span class="avatar rounded-circle element-block">
-											<img class="rounded-circle" src="https://picsum.photos/65/65" alt="Nethor Doct -Developer">
-										</span>
-										<strong class="element-block h5 h">Nethor Doct -<span class="text-gray">Developer</span></strong>
-									</cite>
-								</blockquote>
+
+							<?php }?>
 							</div>
 						</div>
 					</div>

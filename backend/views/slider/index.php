@@ -11,6 +11,8 @@ use yii\grid\GridView;
 
 $this->title = 'Sliders';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['title'] = 'slider';
+
 ?>
 <div class="slider-index">
 

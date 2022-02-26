@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CoursesCategory */
+$this->params['title'] = 'coursescategory';
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Courses Categories', 'url' => ['index']];

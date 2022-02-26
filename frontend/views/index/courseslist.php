@@ -30,7 +30,7 @@ $categorys = Coursescategory::find()->all();
 						<?php
 							echo ListView::widget([
 								'dataProvider' => $courses,
-								'itemView' => '_item',
+								'itemView' => 'course_item',
 								'layout' => "'<div class='row'>{items}</div>\n'",
 								'itemOptions' => [
 									'tag' => false
@@ -59,7 +59,7 @@ $categorys = Coursescategory::find()->all();
 							<!-- search form -->
 							<form class="search-form">
 								<fieldset>
-									<input placeholder=" Search&hellip;" class="form-control" name="s" type="search">
+									<input placeholder=" Search&hellip;" class="form-control" name="s" type="search" value="<?=$_GET['s']?$_GET['s']:''?>">
 									<button type="button" class="fas fa-search"><span class="sr-only">search</span></button>
 								</fieldset>
 							</form>
@@ -73,7 +73,7 @@ $categorys = Coursescategory::find()->all();
 							<h3>Course Intro</h3>
 							<div class="aligncenter overlay">
 								<a href="http://www.youtube.com/embed/9bZkp7q19f0?autoplay=1" class="btn-play far fa-play-circle lightbox fancybox.iframe"></a>
-								<img src="http://placehold.it/262x220" alt="image description">
+								<img src="http://picsum.photos/262/220" alt="image description">
 							</div>
 						</section>
 						<!-- widget popular posts -->
@@ -84,7 +84,7 @@ $categorys = Coursescategory::find()->all();
 								<li>
 									<a href="course-single.html">
 										<div class="alignleft large">
-											<img src="http://placehold.it/80x70" alt="image description">
+											<img src="http://picsum.photos/80/70" alt="image description">
 										</div>
 										<div class="description-wrap">
 											<h4>Introduction to Mobile Apps Development</h4>
@@ -95,7 +95,7 @@ $categorys = Coursescategory::find()->all();
 								<li>
 									<a href="course-single.html">
 										<div class="alignleft large">
-											<img src="http://placehold.it/80x70" alt="image description">
+											<img src="http://picsum.photos/80/70" alt="image description">
 										</div>
 										<div class="description-wrap">
 											<h4>Become a Professional Film Maker</h4>
@@ -106,7 +106,7 @@ $categorys = Coursescategory::find()->all();
 								<li>
 									<a href="course-single.html">
 										<div class="alignleft large">
-											<img src="http://placehold.it/80x70" alt="image description">
+											<img src="http://picsum.photos/80/70" alt="image description">
 										</div>
 										<div class="description-wrap">
 											<h4>Swift Programming For Beginners</h4>

@@ -6,6 +6,7 @@ use common\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Courses */
+$this->params['title'] = 'courses';
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['index']];

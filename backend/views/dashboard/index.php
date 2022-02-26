@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 $this->title = 'Dashboard';
+$this->params['title'] = 'dashboard';
 
 ?>
                 <div class="row">

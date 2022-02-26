@@ -4,7 +4,7 @@ use backend\assets\AdminAsset;
 use common\widgets\Alert;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use yii\widgets\Menu;
+// use yii\widgets\Menu;
 
 AdminAsset::register($this);
 $admin  =  yii::$app->user->identity;
@@ -122,7 +122,7 @@ $admin  =  yii::$app->user->identity;
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">Asosiy menyu</li>
 
-                    <li>
+                    <li class="<?=$this->params['title']=='dashboard'?'active':''?>">
                         <a href="<?=url::home()?>">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             <span class="pull-right-container">
@@ -131,34 +131,34 @@ $admin  =  yii::$app->user->identity;
                     </li>
 
 
-                    <li>
+                    <li class="<?=$this->params['title']=='slider'?'active':''?>">
                         <a href="<?=url::to(['/slider/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Sliders</span>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="<?=$this->params['title']=='coursescategory'?'active':''?>">
                         <a href="<?=url::to(['/coursescategory/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Kurs kategoriyasi</span>
                             <span class="pull-right-container">
                             </span>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?=$this->params['title']=='courses'?'active':''?>">
                         <a href="<?=url::to(['/courses/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Kurslar</span>
                             <span class="pull-right-container">
                             </span>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?=$this->params['title']=='reja'?'active':''?>">
                         <a href="<?=url::to(['/rejalar/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Rejalar</span>
                             <span class="pull-right-container">
                             </span>
                         </a>
                     </li>
-                    <li>
+                    <li class="<?=$this->params['title']=='user'?'active':''?>">
                         <a href="<?=url::to(['/user/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Users</span>
                             <span class="pull-right-container">
@@ -166,7 +166,7 @@ $admin  =  yii::$app->user->identity;
                         </a>
                     </li>
 
-                    <li>
+                    <li class="<?=$this->params['title']=='blogcategory'?'active':''?>">
                         <a href="<?=url::to(['/blog-category/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Blog Category</span>
                             <span class="pull-right-container">
@@ -174,9 +174,17 @@ $admin  =  yii::$app->user->identity;
                         </a>
                     </li>
 
-                    <li>
+                    <li class="<?=$this->params['title']=='blog'?'active':''?>">
                         <a href="<?=url::to(['/blogs/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Blogs</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="<?=$this->params['title']=='xabarlar'?'active':''?>">
+                        <a href="<?=url::to(['/xabarlar/index'])?>">
+                            <i class="fa fa-dashboard"></i> <span>Xabarlar</span>
                             <span class="pull-right-container">
                             </span>
                         </a>

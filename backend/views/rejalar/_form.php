@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 use dosamigos\datetimepicker\DateTimePicker;
+$this->params['title'] = 'reja';
 
 ?>
 

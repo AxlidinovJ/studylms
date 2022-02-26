@@ -5,6 +5,7 @@ use phpDocumentor\Reflection\Types\Array_;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+$this->params['title'] = 'blog';
 
 
 $category = ArrayHelper::map(BlogCategory::find()->all(),'id','blog_name');

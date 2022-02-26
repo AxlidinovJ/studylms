@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Rejalar */
+$this->params['title'] = 'reja';
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Rejalars', 'url' => ['index']];

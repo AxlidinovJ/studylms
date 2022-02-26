@@ -3,44 +3,21 @@
 namespace backend\controllers;
 
 use common\models\Slider;
+use Yii;
+use yii\base\Security;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * SliderController implements the CRUD actions for Slider model.
  */
-class SliderController extends Controller
+class SliderController extends DefaultController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                // 'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        // 'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
+  
 
 
     /**
@@ -92,9 +69,17 @@ class SliderController extends Controller
         $model = new Slider();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $rasm = UploadedFile::getInstance($model,'photo');
+                $random = new Security();
+                $nomi = $random->generateRandomString(32).".".$rasm->extension;
+                $rasm->saveAs("images/slider/".$nomi);
+                $model->photo = $nomi;
+                $model->user_id = Yii::$app->user->identity->id;
+                $model->save();
             }
+            return $this->redirect(['view', 'id' => $model->id]);
+
         } else {
             $model->loadDefaultValues();
         }
@@ -115,8 +100,21 @@ class SliderController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $nomi = $model->photo; 
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $rasm = UploadedFile::getInstance($model,'photo');
+                if($rasm){
+                    if(file_exists("images/slider/".$nomi))
+                    unlink("images/slider/".$nomi);
+                    $random = new Security();
+                    $nomi = $random->generateRandomString(32).".".$rasm->extension;
+                    $rasm->saveAs("images/slider/".$nomi);
+                }
+                $model->photo = $nomi;
+                $model->save();
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

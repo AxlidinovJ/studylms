@@ -1,23 +1,26 @@
 <?php
 
-use backend\models\Courses;
-use common\models\User;
+use common\models\Xabarlar;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+$this->params['title'] = 'xabarlar';
 
-$this->title = 'Courses';
+
+/* @var $this yii\web\View */
+/* @var $searchModel common\models\XabarlarSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Xabarlars';
 $this->params['breadcrumbs'][] = $this->title;
-$this->params['title'] = 'courses';
-
 ?>
-<div class="courses-index">
+<div class="xabarlar-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Courses', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Xabarlar', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,51 +32,40 @@ $this->params['title'] = 'courses';
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            // 'category_id',
-            [
-                'attribute'=>'category_id',
-                'value'=>function($data){
-                    return $data->category->title;
-                }
-            ],
-            // 'instruktor',
-            // 'star',
-            //'view',
-            'img',
-            // 'content:ntext',
-            'price',
+            'text',
             // 'created_at',
+            // 'updated_at',
+            // 'created_by',
+            //'updated_by',
             [
                 'attribute'=>'created_at',
                 'value'=>function($data){
                     return date('d-M Y H:i:s',$data->created_at);
                 }
-            ],
-            // 'updated_at',
-            [
-                'attribute'=>'updated_at',
-                'value'=>function($data){
-                    return date('d-M Y H:i:s',$data->created_at);
-                }
-            ],
-            // 'created_by',
-            [
-                'attribute'=>'created_by',
-                'value'=>function($data){
-                    return User::findOne($data->created_by)->username;
-                }
-            ],
-            // 'updated_by',
+            ], 
             [
                 'attribute'=>'updated_by',
                 'value'=>function($data){
-                    return User::findOne($data->created_by)->username;
+                    return date('d-M Y H:i:s',$data->updated_at);
+                }
+            ], 
+            [
+                'attribute'=>'created_by',
+                'format'=>'html',
+                'value'=>function($data){
+                    return html::a($data->userxabar->username,Url::to(['user/view','id'=>$data->userxabar->id]));
+                }
+            ],
+            [
+                'attribute'=>'updated_by',
+                'format'=>'html',
+                'value'=>function($data){
+                    return html::a($data->userxabar->username,Url::to(['user/view','id'=>$data->userxabar->id]));
                 }
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Courses $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Xabarlar $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

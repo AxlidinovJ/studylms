@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+$this->params['title'] = 'coursescategory';
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CoursesCategory */

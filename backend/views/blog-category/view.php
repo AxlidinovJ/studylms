@@ -9,6 +9,8 @@ use yii\widgets\DetailView;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Blog Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['title'] = 'blogcategory';
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="blog-category-view">

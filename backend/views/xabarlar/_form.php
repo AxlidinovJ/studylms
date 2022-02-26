@@ -2,22 +2,19 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-$this->params['title'] = 'slider';
+$this->params['title'] = 'xabarlar';
+
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Slider */
+/* @var $model common\models\Xabarlar */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="slider-form">
+<div class="xabarlar-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'subtitle')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'photo')->fileInput() ?>
+    <?= $form->field($model, 'text')->textarea(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

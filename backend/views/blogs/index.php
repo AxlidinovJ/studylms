@@ -12,6 +12,8 @@ use yii\grid\GridView;
 
 $this->title = 'Blogs';
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['title'] = 'blog';
+
 ?>
 <div class="blogs-index">
 
@@ -45,6 +47,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=>function($data){
                     return Html::img('/backend/web/images/blogs/'.$data->img,['width'=>'100px']);
                 }
+            ],
+            [
+                'value'=>function($data){
+                    return html::a("salom", );
+                },
+                'label'=>"Yuklab olish",
             ],
             // 'content:ntext',
             //'created_at',

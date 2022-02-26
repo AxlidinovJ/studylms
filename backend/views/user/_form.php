@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+$this->params['title'] = 'reja';
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\User */

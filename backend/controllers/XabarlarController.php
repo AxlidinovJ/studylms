@@ -2,25 +2,43 @@
 
 namespace backend\controllers;
 
-use backend\models\User;
-use backend\models\UserSearch;
-use yii\filters\AccessControl;
+use common\models\Xabarlar;
+use common\models\XabarlarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * XabarlarController implements the CRUD actions for Xabarlar model.
  */
-class UserController extends DefaultController
+class XabarlarController extends Controller
 {
     /**
      * @inheritDoc
      */
-    
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Lists all Xabarlar models.
+     *
+     * @return string
+     */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
+        $searchModel = new XabarlarSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -30,7 +48,7 @@ class UserController extends DefaultController
     }
 
     /**
-     * Displays a single User model.
+     * Displays a single Xabarlar model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -43,13 +61,13 @@ class UserController extends DefaultController
     }
 
     /**
-     * Creates a new User model.
+     * Creates a new Xabarlar model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new Xabarlar();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -65,7 +83,7 @@ class UserController extends DefaultController
     }
 
     /**
-     * Updates an existing User model.
+     * Updates an existing Xabarlar model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -85,7 +103,7 @@ class UserController extends DefaultController
     }
 
     /**
-     * Deletes an existing User model.
+     * Deletes an existing Xabarlar model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -99,15 +117,15 @@ class UserController extends DefaultController
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Xabarlar model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return User the loaded model
+     * @return Xabarlar the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne(['id' => $id])) !== null) {
+        if (($model = Xabarlar::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

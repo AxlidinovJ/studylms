@@ -8,6 +8,7 @@ use app\models\Coursescategory;
 
 $category = Coursescategory::find()->all();
 $categorys = ArrayHelper::map($category,'id','title');
+$this->params['title'] = 'courses';
 
 
 ?>

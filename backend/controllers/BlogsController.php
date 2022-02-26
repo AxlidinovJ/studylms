@@ -14,25 +14,9 @@ use yii\web\UploadedFile;
 /**
  * BlogsController implements the CRUD actions for Blogs model.
  */
-class BlogsController extends Controller
+class BlogsController extends DefaultController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
+
 
     /**
      * Lists all Blogs models.
@@ -152,4 +136,13 @@ class BlogsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    // public function send(){
+    //     echo "salom";
+    // return Yii::$app->response->xSendFile('/home/user/Pictures/picture1.jpg');
+
+    // }
+
+
+
 }

@@ -8,27 +8,10 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 
-class DashboardController extends Controller
+class DashboardController extends DefaultController
 {
 
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                // 'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        // 'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
-
-
+ 
 
     public function actions()
     {
