@@ -5,15 +5,22 @@ namespace frontend\controllers;
 use backend\models\Courses;
 use backend\models\User;
 use common\models\Blogs;
+use common\models\Coment;
 use common\models\Rejalar;
+use frontend\models\ComentForm;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
+const COMENT_CATEGORY_COURS = 1;
+const COMENT_CATEGORY_BLOG = 2;
+// consT COMENT_CATEGORY_COURS = 3;
 
 class IndexController extends Controller
 {
 
+   
     public function actionIndex()
     {
         $courses = Courses::find()->limit(4)->all();
@@ -25,7 +32,16 @@ class IndexController extends Controller
     {
         $this->layout = "main2";
         $courses = Courses::findOne($id);
-        return $this->render('coursesingle',['courses'=>$courses]);
+        $coment = new Coment();
+
+        if($coment->load(Yii::$app->request->post())){
+
+            $coment->category_id = COMENT_CATEGORY_COURS;
+            $coment->coment_id  = $id;
+            $coment->save();
+            return $this->redirect(['coursesingle','id' => $courses->id]);
+        }
+        return $this->render('coursesingle',['courses'=>$courses,'comentModel'=>$coment]);
     }
     
 
@@ -133,14 +149,34 @@ class IndexController extends Controller
     public function actionBlog()
     {
         $this->layout = "main2";
-        $blogs = Blogs::find()->orderBy('created_at DESC')->all();
-        return $this->render('blog',['blogs'=>$blogs]);
+        $blogs = Blogs::find();
+        $blogss = new ActiveDataProvider([
+            'query' => $blogs,
+            'pagination' => [
+                'pageSize' => 4
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+        ]);
+        return $this->render('blog',['blogss'=>$blogss]);
     }
+
     public function actionBlogsingle($id)
     {
         $this->layout = "main2";
         $blog = Blogs::findOne($id);
-        return $this->render('blogsingle',['blog'=>$blog]);
+        $coment = new Coment();
+        if($coment->load(Yii::$app->request->post())){
+
+            $coment->category_id = COMENT_CATEGORY_BLOG;
+            $coment->coment_id  = $id;
+            $coment->save();
+            return $this->redirect(['blogsingle','id' => $blog->id]);
+        }
+        return $this->render('blogsingle',['blog'=>$blog,'comentModel'=>$coment]);
     }
 
     public function actionLoginregister()

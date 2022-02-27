@@ -1,7 +1,9 @@
 <?php
 
+use common\models\Coment;
 use yii\helpers\Url;
-
+$comentsCount2 = Coment::find()->where(['category_id'=>1])->andWhere(['coment_id'=>$model->id])->all();
+$comentsCount = count($comentsCount2);
 ?>
 <div class="col-xs-12 col-sm-6 col-lg-4">
     <!-- popular post -->
@@ -33,7 +35,7 @@ use yii\helpers\Url;
                 <li>
                     <a href="#">
                         <span class="fas icn no-shrink fa-comments"><span class="sr-only">comments</span></span>
-                        <strong class="text fw-normal">10</strong>
+                        <strong class="text fw-normal"><?=$comentsCount?></strong>
                     </a>
                 </li>
             </ul>

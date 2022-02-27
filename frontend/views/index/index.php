@@ -5,6 +5,7 @@ use app\models\Coursescategory;
 use backend\models\Courses;
 use backend\models\User;
 use common\models\Blogs;
+use common\models\Coment;
 use yii\helpers\Url;
 use common\models\Rejalar;
 use common\models\Slider;
@@ -17,6 +18,8 @@ $blogs = Blogs::find()->orderBy('created_at DESC')->limit(3)->all();
 $kurslarSoni = count(Courses::find()->all());
 $oqituvchilarSoni = count(User::find()->where('type=2')->all());
 $oquvchilarSoni = count(User::find()->where('type=3')->all());
+
+
 
 ?>
 <!-- intro block -->
@@ -87,7 +90,10 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 			<div class="row">
 				<!-- popular posts slider -->
 				<div class="slider popular-posts-slider">
-                    <?php foreach ($courses as $course) {?>
+                    <?php foreach ($courses as $course) {
+					$comentsCount2 = Coment::find()->where(['category_id'=>1])->andWhere(['coment_id'=>$course->id])->all();
+					$comentsCount = count($comentsCount2);
+						?>
 					<div>
 						<div class="col-xs-12">
 							<!-- popular post -->
@@ -110,13 +116,13 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 										<li>
 											<a href="#">
 												<span class="fas icn fa-users no-shrink"><span class="sr-only">users</span></span>
-												<strong class="text fw-normal">98</strong>
+												<strong class="text fw-normal"><.></strong>
 											</a>
 										</li>
 										<li>
 											<a href="#">
 												<span class="fas icn no-shrink fa-comments"><span class="sr-only">comments</span></span>
-												<strong class="text fw-normal">10</strong>
+												<strong class="text fw-normal"><?=$comentsCount?></strong>
 											</a>
 										</li>
 									</ul>

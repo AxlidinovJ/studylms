@@ -1,10 +1,13 @@
 <?php
 
 use yii\helpers\Url;
+use yii\bootstrap4\LinkPager;
+use yii\widgets\ListView;
 
 $this->title  = "Instructors";
 $this->params['title'] = $this->title; 
 $this->params['breadscrumb'] = $this->title;
+
 ?>
 
 
@@ -13,43 +16,30 @@ $this->params['breadscrumb'] = $this->title;
         <!-- content -->
         <section id="content" class="col-xs-12 col-md-9">
 
-        <?php foreach($blogs as $blog): ?>
-        <article class="blogPost">
-                <time datetime="2011-01-12" class="timeStamp font-lato text-center text-uppercase">
-                    <strong class="date fw-normal element-block"><?=date('d',$blog->created_at)?></strong>
-                    <span class="element-block"><?=date('M',$blog->created_at)?></span>
-                    <span class="element-block"><?=date('Y',$blog->created_at)?></span>
-                </time>
-                <div class="aligncenter">
-                    <img src="<?=Url::to("/backend/web/images/blogs/".$blog->img)?>" alt="image description">
-                </div>
-                <h1><?=$blog->title?></h1>
-                <!-- postActionsInfo -->
-                <ul class="list-unstyled postActionsInfo text-uppercase">
-                <li><a href="#"><i class="far fa-user icn"></i> by <?=$blog->username->name?></a></li>
-                    <li><a href="#"><i class="far fa-folder icn"></i> <?=$blog->category->blog_name?></a></li>
-                    <li><a href="#"><i class="far fa-comment icn"></i> 3 Comments</a></li>
-                </ul>
-                <p><?=substr($blog->content,0,500)?>…</p>
-                <a href="<?=url::to(['/index/blogsingle','id'=>$blog->id])?>" class="btn btn-default text-uppercase">Read More</a>
-            </article>
+        <?php
+        echo ListView::widget([
+            'dataProvider' => $blogss,
+            'itemView' => 'blog_item',
+            'layout' => "<div>{items}</div>\n",
+            'itemOptions' => [
+                'tag' => false
+            ]
+        ]);
+        ?>
 
-        <?php endforeach;?>
-            
-            <nav aria-label="Page navigation">
-                <!-- pagination -->
-                <ul class="pagination">
-                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="#">2</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">›</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+        
+            <?php
+            echo LinkPager::widget([
+                'pagination' => $blogss->pagination,
+                'options' => [
+                        'class' => 'page-numbers'
+                ],
+                'disableCurrentPageButton' => true
+            ]);
+            ?>
+
         </section>
-
+       
         <aside class="col-xs-12 col-md-3" id="sidebar">
             <!-- widget search -->
             <section class="widget widget_search">

@@ -1,18 +1,27 @@
 <?php
 
+use common\models\Coment;
+use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Html;
 use yii\helpers\Url;
+use kartik\rating\StarRating;
 
 $this->title = $courses->title;
 $this->params['breadcrumbs'][] = $courses->category->title;
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = $this->title;
 
+
+$coments = Coment::find()->where(['category_id'=>1])->andWhere(['coment_id'=>$courses->id])->orderBy('created_at DESC')->limit(10)->all();
+$comentsCount2 = Coment::find()->where(['category_id'=>1])->andWhere(['coment_id'=>$courses->id])->all();
+$comentsCount = count($comentsCount2);
+
 ?>
 
 		<div id="two-columns" class="container">
 				<div class="row">
 					<!-- content -->
-					<article id="content" class="col-xs-12 col-md-9">
+					<article	ticle id="content" class="col-xs-12 col-md-9">
 						<!-- content h1 -->
 						<h1 class="content-h1 fw-semi"><?=$courses->title?></h1>
 						<!-- view header -->
@@ -22,10 +31,10 @@ $this->params['title'] = $this->title;
 									<!-- post author -->
 									<div class="post-author">
 										<div class="alignleft no-shrink rounded-circle">
-											<a href="#"><img src="https://picsum.photos/35/35" class="rounded-circle" alt="image description"></a>
+											<a href="<?=url::to(['index/instructorsingle','id'=>$courses->instruktor2->id])?>"><img src="<?=url::to("/backend/web/images/users/".$courses->instruktor2->photo)?>" class="rounded-circle" alt="image description"></a>
 										</div>
 										<div class="description-wrap">
-											<h2 class="author-heading"><a href="#">Instructor</a></h2>
+											<h2 class="author-heading"><a href="<?=url::to(['index/instructorsingle','id'=>$courses->instruktor2->id])?>">Instructor</a></h2>
 											<h3 class="author-heading-subtitle text-uppercase"><?=$courses->instruktor2->name?></h3>
 										</div>
 									</div>
@@ -37,7 +46,7 @@ $this->params['title'] = $this->title;
 											<i class="far fa-bookmark"></i>
 										</div>
 										<div class="description-wrap">
-											<h2 class="author-heading"><a href="#">Category</a></h2>
+											<h2 class="author-heading"><a href="<?=url::to(['index/courseslist','category'=>$courses->id])?>">Category</a></h2>
 											<h3 class="author-heading-subtitle text-uppercase"><?=$courses->category->title?></h3>
 										</div>
 									</div>
@@ -52,7 +61,7 @@ $this->params['title'] = $this->title;
 										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
 										<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
 									</ul>
-									<strong class="element-block text-right subtitle fw-normal">(2 Reviews)</strong>
+									<strong class="element-block text-right subtitle fw-normal">(<?=$comentsCount?> Reviews)</strong>
 								</div>
 							</div>
 						</header>
@@ -60,171 +69,7 @@ $this->params['title'] = $this->title;
 							<img src="<?=Url::to('/backend/web/photos/'.$courses->img)?>" alt="image description">
 						</div>
 						<?=$courses->content?>
-						<h2>Carriculam</h2>
-						<!-- sectionRow -->
-						<section class="sectionRow">
-							<h2 class="h6 text-uppercase fw-semi rowHeading">Section-1: Introduction</h2>
-							<!-- sectionRowPanelGroup -->
-							<div class="panel-group sectionRowPanelGroup" id="accordion" role="tablist" aria-multiselectable="true">
-								<!-- panel -->
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingOne">
-										<h3 class="panel-title fw-normal">
-											<a class="accOpener" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-												<span class="accOpenerCol">
-													<i class="fas fa-chevron-circle-right accOpenerIcn"></i><i class="fas fa-play-circle inlineIcn"></i> Welcome to the course <span class="label label-primary text-white text-uppercase">Video</span>
-												</span>
-												<span class="accOpenerCol hd-phone">
-													<span class="tagText bg-primary fw-semi text-white text-uppercase">preview</span>
-													<time datetime="2011-01-12" class="timeCount">17 Min</time>
-												</span>
-											</a>
-										</h3>
-									</div>
-									<!-- collapseOne -->
-									<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-										<div class="panel-body">
-											<p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-										</div>
-									</div>
-								</div>
-								<!-- panel -->
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingTwo">
-										<h3 class="panel-title fw-normal">
-											<a class="accOpener" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-												<span class="accOpenerCol">
-													<i class="fas fa-chevron-circle-right accOpenerIcn"></i><i class="far fa-file inlineIcn"></i> Add and manage users <span class="label label-success text-white text-uppercase">free</span>
-												</span>
-												<span class="accOpenerCol hd-phone">
-													<time datetime="2011-01-12" class="timeCount">25 Min</time>
-												</span>
-											</a>
-										</h3>
-									</div>
-									<!-- collapseOne -->
-									<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-										<div class="panel-body">
-											<p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-										</div>
-									</div>
-								</div>
-								<!-- panel -->
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingThree">
-										<h3 class="panel-title fw-normal">
-											<a class="accOpener" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-												<span class="accOpenerCol">
-													<i class="fas fa-chevron-circle-right accOpenerIcn"></i><i class="fas fa-puzzle-piece inlineIcn"></i> Magic wand vs quick selection <span class="label label-primary text-white text-uppercase">Quiz</span>
-												</span>
-												<span class="accOpenerCol hd-phone">
-													<time datetime="2011-01-12" class="timeCount">37 Min</time>
-												</span>
-											</a>
-										</h3>
-									</div>
-									<!-- collapseOne -->
-									<div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
-										<div class="panel-body">
-											<p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-										</div>
-									</div>
-								</div>
-								<!-- panel -->
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingFour">
-										<h3 class="panel-title fw-normal">
-											<a class="accOpener" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-												<span class="accOpenerCol">
-													<i class="fas fa-chevron-circle-right accOpenerIcn"></i><i class="fas fa-play-circle inlineIcn"></i> How to use LearnPress <span class="label label-primary text-white text-uppercase">Video</span>
-												</span>
-												<span class="accOpenerCol hd-phone">
-													<span class="tagText bg-primary fw-semi text-white text-uppercase">preview</span>
-													<time datetime="2011-01-12" class="timeCount">22 Min</time>
-												</span>
-											</a>
-										</h3>
-									</div>
-									<!-- collapseOne -->
-									<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-										<div class="panel-body">
-											<p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-										</div>
-									</div>
-								</div>
-								<!-- panel -->
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingFive">
-										<h3 class="panel-title fw-normal">
-											<a class="accOpener" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-												<span class="accOpenerCol">
-													<i class="fas fa-chevron-circle-right accOpenerIcn"></i><i class="far fa-file inlineIcn"></i> Add and manage users <span class="label label-warning text-white text-uppercase">Seminare</span>
-												</span>
-												<span class="accOpenerCol hd-phone">
-													<time datetime="2011-01-12" class="timeCount">48 Min</time>
-												</span>
-											</a>
-										</h3>
-									</div>
-									<!-- collapseOne -->
-									<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-										<div class="panel-body">
-											<p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						<!-- sectionRow -->
-						<section class="sectionRow">
-							<h2 class="h6 text-uppercase fw-semi rowHeading">Section-2: Basic tools Management</h2>
-							<!-- sectionRowPanelGroup -->
-							<div class="panel-group sectionRowPanelGroup" id="accordion2" role="tablist" aria-multiselectable="true">
-								<!-- panel -->
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="heading2One">
-										<h3 class="panel-title fw-normal">
-											<a class="accOpener" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapse2One" aria-expanded="false" aria-controls="collapse2One">
-												<span class="accOpenerCol">
-													<i class="fas fa-chevron-circle-right accOpenerIcn"></i><i class="fas fa-play-circle inlineIcn"></i> Welcome to the course <span class="label label-primary text-white text-uppercase">Video</span>
-												</span>
-												<span class="accOpenerCol hd-phone">
-													<span class="tagText bg-primary fw-semi text-white text-uppercase">preview</span>
-													<time datetime="2011-01-12" class="timeCount">17 Min</time>
-												</span>
-											</a>
-										</h3>
-									</div>
-									<!-- collapseOne -->
-									<div id="collapse2One" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2One">
-										<div class="panel-body">
-											<p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-										</div>
-									</div>
-								</div>
-								<!-- panel -->
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="heading2Two">
-										<h3 class="panel-title fw-normal">
-											<a class="accOpener" role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapse2Two" aria-expanded="false" aria-controls="collapse2Two">
-												<span class="accOpenerCol">
-													<i class="fas fa-chevron-circle-right accOpenerIcn"></i><i class="far fa-file inlineIcn"></i> Add and manage users <span class="label label-success text-white text-uppercase">free</span>
-												</span>
-												<span class="accOpenerCol hd-phone">
-													<time datetime="2011-01-12" class="timeCount">25 Min</time>
-												</span>
-											</a>
-										</h3>
-									</div>
-									<!-- collapseOne -->
-									<div id="collapse2Two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2Two">
-										<div class="panel-body">
-											<p>Capitalize on low hanging fruit to identify a ballpark value added activity beta test Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
+
 						<!-- bookmarkFoot -->
 						<div class="bookmarkFoot">
 							<div class="bookmarkCol">
@@ -243,104 +88,68 @@ $this->params['title'] = $this->title;
 						<!-- instructorInfoBox -->
 						<div class="instructorInfoBox">
 							<div class="alignleft">
-								<a href="instructor-single.html"><img src="https://picsum.photos/80/80" alt="Merry Jhonson"></a>
+								<a href="instructor-single.html"><img src="<?=url::to("/backend/web/images/users/".$courses->instruktor2->photo)?>" alt="Merry Jhonson"></a>
 							</div>
 							<div class="description-wrap">
-								<h3 class="fw-normal"><a href="instructor-single.html">Merry Jhonson</a></h3>
+								<h3 class="fw-normal"><a href="instructor-single.html"><?=$courses->instruktor2->name?></a></h3>
 								<h4 class="fw-normal">Back-end Developer</h4>
-								<p>Encyclopaedia galactica Orion's sword explorations vanquish the impossible, astonishment radio telescope with pretty stories for which there's little good.</p>
-								<a href="#" class="btn btn-default font-lato fw-semi text-uppercase">View Profile</a>
+								<p><?=$courses->instruktor2->biografiya?></p>
+								<a href="<?=url::to(['index/instructorsingle','id'=>$courses->instruktor2->id])?>" class="btn btn-default font-lato fw-semi text-uppercase">View Profile</a>
 							</div>
 						</div>
 						<h2>Reviews</h2>
-						<h3 class="h6 fw-semi">There are 2 reviews on this course</h3>
+						<h3 class="h6 fw-semi">There are <?=$comentsCount?> reviews on this course</h3>
 						<!-- reviewsList -->
 						<ul class="list-unstyled reviewsList">
-							<li>
+							
+			<?php foreach($coments as $coment)	{?>
+				<li>
 								<div class="alignleft">
 									<a href="instructor-single.html"><img src="https://picsum.photos/50/50" alt="Lavin Duster"></a>
 								</div>
 								<div class="description-wrap">
 									<div class="descrHead">
-										<h3>Lavin Duster – <time datetime="2011-01-12">March 7, 2016</time></h3>
+										<h3><?=Html::encode($coment->name)?>– <time datetime="<?=date('d-m-y',$coment->created_at)?>"><?=date('d-M Y H:i:s',$coment->created_at)?></time></h3>
 										<ul class="star-rating list-unstyled justify-end">
+											<?php for($i=0; $i<$coment->reyting; $i++){?>
 											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
+											<?php } ?>
 										</ul>
 									</div>
-									<p>Brunch fap cardigan, gentrify put a bird on it distillery mumblecore you probably haven't heard of them asymmetrical bushwick. Put a bird on it schlitz fashion.</p>
+									<p><?=Html::encode($coment->text)?>.</p>
 								</div>
 							</li>
-							<li>
-								<div class="alignleft">
-									<a href="instructor-single.html"><img src="https://picsum.photos/50x50" alt="Tim Cook"></a>
-								</div>
-								<div class="description-wrap">
-									<div class="descrHead">
-										<h3>Tim Cook – <time datetime="2011-01-12">March 5, 2016</time></h3>
-										<ul class="star-rating list-unstyled justify-end">
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-											<li><span class="fas fa-star"><span class="sr-only">star</span></span></li>
-										</ul>
-									</div>
-									<p>Flxie sartorial cray flexitarian pop-up health goth single-origin coffee sriracha</p>
-								</div>
-							</li>
+							<?php } ?>
+							
 						</ul>
 						<!-- reviesSubmissionForm -->
-						<form action="#" class="reviesSubmissionForm">
-							<h2 class="text-noCase">Add a Review</h2>
-							<p>Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-							<div class="form-group">
-								<span class="formLabel fw-normal font-lato no-shrink">Your Rating</span>
-								<ul class="star-rating list-unstyled">
-									<li>
-										<input type="checkbox" id="rate1" class="customFormReset">
-										<label for="rate1" class="fas fa-star"><span class="sr-only">star</span></label>
-									</li>
-									<li>
-										<input type="checkbox" id="rate2" class="customFormReset">
-										<label for="rate2" class="fas fa-star"><span class="sr-only">star</span></label>
-									</li>
-									<li>
-										<input type="checkbox" id="rate3" class="customFormReset">
-										<label for="rate3" class="fas fa-star"><span class="sr-only">star</span></label>
-									</li>
-									<li>
-										<input type="checkbox" id="rate4" class="customFormReset">
-										<label for="rate4" class="fas fa-star"><span class="sr-only">star</span></label>
-									</li>
-									<li>
-										<input type="checkbox" id="rate5" class="customFormReset">
-										<label for="rate5" class="fas fa-star"><span class="sr-only">star</span></label>
-									</li>
-								</ul>
-							</div>
-							<div class="form-group">
-								<label for="rview" class="formLabel fw-normal font-lato no-shrink">Your Review <span class="required">*</span></label>
-								<textarea id="rview" class="form-control element-block"></textarea>
-							</div>
-							<div class="form-group">
-								<label for="name" class="formLabel fw-normal font-lato no-shrink">Name <span class="required">*</span></label>
-								<input type="text" id="name" class="form-control element-block">
-							</div>
-							<div class="form-group">
-								<label for="Email" class="formLabel fw-normal font-lato no-shrink">Email <span class="required">*</span></label>
-								<input type="email" id="Email" class="form-control element-block">
-							</div>
-							<button type="submit" class="btn btn-theme btn-warning text-uppercase font-lato fw-bold">Submit</button>
-						</form>
+							<?php
+
+							$form = ActiveForm::begin(['options'=>['class'=>'reviesSubmissionForm']]);
+
+							echo '<h2 class="text-noCase">Add a Review</h2>
+							<p>Your email address will not be published. Required fields are marked <span class="required">*</span></p>';
+
+							echo $form->field($comentModel, 'reyting')->widget(StarRating::classname(), [
+								'pluginOptions' => ['step' => 1]
+							]);
+
+							echo $form->field($comentModel,'text')->textarea();
+							echo $form->field($comentModel,'name')->textInput();
+							echo $form->field($comentModel,'email')->textInput();
+
+							echo Html::SubmitButton("Jo'natish",['class'=>'btn btn-theme btn-warning text-uppercase font-lato fw-bold']);
+
+							ActiveForm::end();
+
+						
+						?>
+
 					</article>
 					<!-- sidebar -->
 					<aside class="col-xs-12 col-md-3" id="sidebar">
 						<!-- widget course select -->
-						<section class="widget widget_box widget_course_select">
+						<section class="widget widget_box widget_course_select">	
 							<header class="widgetHead text-center bg-theme">
 								<h3 class="text-uppercase">Take This Course</h3>
 							</header>

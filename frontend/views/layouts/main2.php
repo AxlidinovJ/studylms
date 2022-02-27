@@ -177,8 +177,8 @@ Sayt2Asset::register($this);
 						<h3>Popular Courses</h3>
 						<!-- widget cources list -->
 						<ul class="widget-cources-list list-unstyled">
-							<li>
-								<a href="course-single">
+						<li>
+								<a href="<?=url::to(['index/courseslist'])?>">
 									<div class="alignleft">
 										<img src="https://picsum.photos/60/60" alt="image description">
 									</div>
@@ -189,7 +189,7 @@ Sayt2Asset::register($this);
 								</a>
 							</li>
 							<li>
-								<a href="course-single">
+								<a href="<?=url::to(['index/courseslist'])?>">
 									<div class="alignleft">
 										<img src="https://picsum.photos/60/60" alt="image description">
 									</div>
@@ -200,7 +200,7 @@ Sayt2Asset::register($this);
 								</a>
 							</li>
 							<li>
-								<a href="course-single">
+								<a href="<?=url::to(['index/courseslist'])?>">
 									<div class="alignleft">
 										<img src="https://picsum.photos/60/60" alt="image description">
 									</div>
