@@ -7,15 +7,20 @@ use backend\models\User;
 use common\models\Blogs;
 use common\models\Coment;
 use common\models\Rejalar;
+use common\models\Shop;
+use common\models\Views;
 use frontend\models\ComentForm;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveRecord;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\ErrorAction;
+use yii\web\NotFoundHttpException;
 
 const COMENT_CATEGORY_COURS = 1;
 const COMENT_CATEGORY_BLOG = 2;
-// consT COMENT_CATEGORY_COURS = 3;
+consT COMENT_CATEGORY_SHOP = 3;
 
 class IndexController extends Controller
 {
@@ -32,18 +37,58 @@ class IndexController extends Controller
     {
         $this->layout = "main2";
         $courses = Courses::findOne($id);
-        $coment = new Coment();
+        if (!$courses) {
+            throw new NotFoundHttpException();
+        } else {
+            $coment = new Coment();
+            if ($coment->load(Yii::$app->request->post())) {
+                $coment->category_id = COMENT_CATEGORY_COURS;
+                $coment->coment_id = $id;
+                $coment->save();
+                return $this->redirect(['coursesingle', 'id' => $courses->id]);
+            }
 
-        if($coment->load(Yii::$app->request->post())){
 
-            $coment->category_id = COMENT_CATEGORY_COURS;
-            $coment->coment_id  = $id;
-            $coment->save();
-            return $this->redirect(['coursesingle','id' => $courses->id]);
+            $view = Views::findOne([
+                'post_id' => $id,
+                'category_id' => COMENT_CATEGORY_COURS,
+            ]);
+
+            if (isset($view)) {
+                $view->viewcount += 1;
+                $view->save();
+            } else {
+                $view2 = new Views();
+                $view2->category_id = COMENT_CATEGORY_COURS;
+                $view2->post_id = $id;
+                $view2->viewcount++;
+                $view2->save();
+            }
+
+
+            return $this->render('coursesingle', ['courses' => $courses, 'comentModel' => $coment]);
         }
-        return $this->render('coursesingle',['courses'=>$courses,'comentModel'=>$coment]);
     }
     
+
+    public function actionProduct($id)
+    {
+        $this->layout = "main2";
+        $model = Shop::findOne($id);
+        if(!$model){
+            throw new NotFoundHttpException();
+        }else{
+        $coment = new Coment();
+        if($coment->load(Yii::$app->request->post())){
+            $coment->category_id = COMENT_CATEGORY_SHOP;
+            $coment->coment_id  = $id;
+            $coment->save();
+            return $this->redirect(['product','id' => $model->id]);
+        }
+            return $this->render('product',['model'=>$model,'comentModel'=>$coment]);
+        }
+    }
+
 
 
     public function actionCourseslist($s = null,$category='all')
@@ -74,8 +119,12 @@ class IndexController extends Controller
     {
         $this->layout = "main2";
         $instruktor = User::findOne($id);
-        $courses = Courses::find()->where('instruktor='.$instruktor->id)->all();
-        return $this->render('instructorsingle',['instruktor'=>$instruktor,'courses'=>$courses]);
+        if(!$instruktor){
+            throw new NotFoundHttpException();
+        }else {
+            $courses = Courses::find()->where('instruktor=' . $instruktor->id)->all();
+            return $this->render('instructorsingle', ['instruktor' => $instruktor, 'courses' => $courses]);
+        }
     }
 
 
@@ -105,7 +154,11 @@ class IndexController extends Controller
     {
         $this->layout = "main2";
         $reja = Rejalar::findOne($id);
-        return $this->render('eventsingle',['reja'=>$reja]);
+        if(!$reja){
+            throw new NotFoundHttpException();
+        }else {
+            return $this->render('eventsingle', ['reja' => $reja]);
+        }
     }
 
     public function actionError()
@@ -168,15 +221,19 @@ class IndexController extends Controller
     {
         $this->layout = "main2";
         $blog = Blogs::findOne($id);
-        $coment = new Coment();
-        if($coment->load(Yii::$app->request->post())){
+        if(!$blog){
+            throw new NotFoundHttpException("xatolik",404);
+        }else {
+            $coment = new Coment();
+            if ($coment->load(Yii::$app->request->post())) {
 
-            $coment->category_id = COMENT_CATEGORY_BLOG;
-            $coment->coment_id  = $id;
-            $coment->save();
-            return $this->redirect(['blogsingle','id' => $blog->id]);
+                $coment->category_id = COMENT_CATEGORY_BLOG;
+                $coment->coment_id = $id;
+                $coment->save();
+                return $this->redirect(['blogsingle', 'id' => $blog->id]);
+            }
+            return $this->render('blogsingle', ['blog' => $blog, 'comentModel' => $coment]);
         }
-        return $this->render('blogsingle',['blog'=>$blog,'comentModel'=>$coment]);
     }
 
     public function actionLoginregister()
@@ -189,19 +246,20 @@ class IndexController extends Controller
     public function actionShop()
     {
         $this->layout = "main2";
-        return $this->render('shop');
+        $data  = new ActiveDataProvider([
+            'query'=>Shop::find(),
+            'pagination'=>[
+                'pageSize'=>6,
+            ],
+        ]);
+        return $this->render('shop',['dataProvider'=>$data]);
     }
 
-    public function actionProduct()
-    {
-        $this->layout = "main2";
-        return $this->render('product');
-    }
 
     public function actionCartage()
     {
         $this->layout = "main2";
-        return $this->render('cartage');
+        return $this->renderAjax('cartage');
     }
 
     public function actionCheckout()

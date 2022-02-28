@@ -1,9 +1,19 @@
 <?php
 
 use common\models\Coment;
+use common\models\Views;
 use yii\helpers\Url;
+
+
 $comentsCount2 = Coment::find()->where(['category_id'=>1])->andWhere(['coment_id'=>$model->id])->all();
 $comentsCount = count($comentsCount2);
+
+
+					$view = Views::findOne([
+						'post_id'=>$model->id,
+						'category_id'=>1,
+					]);
+					$viewCount = $view->viewcount??"0";
 ?>
 <div class="col-xs-12 col-sm-6 col-lg-4">
     <!-- popular post -->
@@ -29,7 +39,7 @@ $comentsCount = count($comentsCount2);
                 <li>
                     <a href="#">
                         <span class="fas icn fa-users no-shrink"><span class="sr-only">users</span></span>
-                        <strong class="text fw-normal">98</strong>
+                        <strong class="text fw-normal"><?=$viewCount?></strong>
                     </a>
                 </li>
                 <li>

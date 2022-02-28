@@ -1,5 +1,6 @@
 <?php
 use app\models\Coursescategory;
+use SebastianBergmann\CodeCoverage\Report\PHP;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -8,6 +9,8 @@ $this->title = "Cours list";
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = $this->title;
 $categorys = Coursescategory::find()->all();
+
+
 
 ?>
 
@@ -59,7 +62,7 @@ $categorys = Coursescategory::find()->all();
 							<!-- search form -->
 							<form class="search-form">
 								<fieldset>
-									<input placeholder=" Search&hellip;" class="form-control" name="s" type="search" value="<?=$_GET['s']?$_GET['s']:''?>">
+									<input placeholder=" Search&hellip;" class="form-control" name="s" type="search" value="<?=isset($_GET['s'])?$_GET['s']:''?>">
 									<button type="button" class="fas fa-search"><span class="sr-only">search</span></button>
 								</fieldset>
 							</form>
@@ -78,44 +81,12 @@ $categorys = Coursescategory::find()->all();
 						</section>
 						<!-- widget popular posts -->
 						<section class="widget widget_popular_posts">
-							<h3>Popular Courses</h3>
-							<!-- widget cources list -->
-							<ul class="widget-cources-list list-unstyled">
-								<li>
-									<a href="course-single.html">
-										<div class="alignleft large">
-											<img src="http://picsum.photos/80/70" alt="image description">
-										</div>
-										<div class="description-wrap">
-											<h4>Introduction to Mobile Apps Development</h4>
-											<strong class="price text-primary element-block font-lato text-uppercase">$99.00</strong>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="course-single.html">
-										<div class="alignleft large">
-											<img src="http://picsum.photos/80/70" alt="image description">
-										</div>
-										<div class="description-wrap">
-											<h4>Become a Professional Film Maker</h4>
-											<strong class="price text-success element-block font-lato text-uppercase">Free</strong>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="course-single.html">
-										<div class="alignleft large">
-											<img src="http://picsum.photos/80/70" alt="image description">
-										</div>
-										<div class="description-wrap">
-											<h4>Swift Programming For Beginners</h4>
-											<strong class="price text-primary element-block font-lato text-uppercase">$75.00</strong>
-										</div>
-									</a>
-								</li>
-							</ul>
-						</section>
+
+						<?php
+							include_once "populacours.php";
+						?>
+						
+					</section>
 					</aside>
 				</div>
 			</div>
