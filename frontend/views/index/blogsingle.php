@@ -162,16 +162,9 @@ $comentsCount = count($comentsCount2);
             </section>
             <!-- widget categories -->
             <section class="widget widget_categories">
-                <h3>Categories</h3>
-                <ul class="list-unstyled text-capitalize font-lato">
-                    <li class="cat-item cat-item-1"><a href="#">Business</a></li>
-                    <li class="cat-item active cat-item-2"><a href="#">Design</a></li>
-                    <li class="cat-item cat-item-3"><a href="#">Programing Language</a></li>
-                    <li class="cat-item cat-item-4"><a href="#">Photography</a></li>
-                    <li class="cat-item cat-item-5"><a href="#">Language</a></li>
-                    <li class="cat-item cat-item-6"><a href="#">Life Style</a></li>
-                    <li class="cat-item cat-item-7"><a href="#">IT &amp; Software</a></li>
-                </ul>
+                     <?php
+							include_once "categoryfunc.php";
+						?>
             </section>
             <!-- widget intro -->
             <section class="widget widget_intro">
@@ -184,45 +177,9 @@ $comentsCount = count($comentsCount2);
             </section>
             <!-- widget popular posts -->
             <section class="widget widget_popular_posts">
-                <h3>Popular Courses</h3>
-                <!-- widget cources list -->
-                <ul class="widget-cources-list list-unstyled">
-                    <li>
-                        <a href="course-single.html">
-                            <div class="alignleft">
-                                <img src="http://placehold.it/60x60" alt="image description">
-                            </div>
-                            <div class="description-wrap">
-                                <h4>Introduction to Mobile Apps Development</h4>
-                                <strong
-                                    class="price text-primary element-block font-lato text-uppercase">$99.00</strong>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="course-single.html">
-                            <div class="alignleft">
-                                <img src="http://placehold.it/60x60" alt="image description">
-                            </div>
-                            <div class="description-wrap">
-                                <h4>Become a Professional Film Maker</h4>
-                                <strong class="price text-success element-block font-lato text-uppercase">Free</strong>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="course-single.html">
-                            <div class="alignleft">
-                                <img src="http://placehold.it/80x70" alt="image description">
-                            </div>
-                            <div class="description-wrap">
-                                <h4>Swift Programming For Beginners</h4>
-                                <strong
-                                    class="price text-primary element-block font-lato text-uppercase">$75.00</strong>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                        <?php
+							include_once "populacours.php";
+						?>
             </section>
             <!-- widget tags -->
             <nav class="widget widget_tags">

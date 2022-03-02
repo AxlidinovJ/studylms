@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = 'reja';
 
 ?>
+<div class="box box-success box-body">
+
 <div class="rejalar-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -31,12 +33,30 @@ $this->params['title'] = 'reja';
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'title',
             'subtitle',
             'img',
-            'content:ntext',
-            //'hour',
+            // 'content:ntext',
+            [
+                'attribute'=>'content',
+                'value'=>function($data){
+                    return substr($data->content,0, 100);
+                }
+            ],
+            // 'hour',
+            [
+                'attribute'=>'hour',
+                'format'=>'html',
+                'value'=>function($data){
+                    $vaqt = $data->hour;
+                    if($vaqt>=time()){
+                        return '<span class="bg-primary">'.date('d-m-Y H:i:s',$data->hour)."</span>";
+                    }else{
+                        return '<span class="bg-danger">'.date('d-m-Y H:i:s',$data->hour)."</span>";
+                    }
+                }
+            ],
             //'location:ntext',
             //'user_id',
             //'created_at',
@@ -50,4 +70,5 @@ $this->params['title'] = 'reja';
     ]); ?>
 
 
+</div>
 </div>

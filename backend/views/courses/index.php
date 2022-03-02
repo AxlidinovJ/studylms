@@ -6,12 +6,15 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 $this->title = 'Courses';
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = 'courses';
 
 ?>
+<div class="box box-success box-body">
+
 <div class="courses-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -21,7 +24,7 @@ $this->params['title'] = 'courses';
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <?php Pjax::begin();?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -38,8 +41,6 @@ $this->params['title'] = 'courses';
                 }
             ],
             // 'instruktor',
-            // 'star',
-            //'view',
             'img',
             // 'content:ntext',
             'price',
@@ -80,5 +81,8 @@ $this->params['title'] = 'courses';
         ],
     ]); ?>
 
+<?php Pjax::end();?>
+
+</div>
 
 </div>

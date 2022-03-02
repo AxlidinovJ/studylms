@@ -9,6 +9,8 @@ $this->title = 'Create Blogs';
 $this->params['breadcrumbs'][] = ['label' => 'Blogs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="box box-success box-body">
+
 <div class="blogs-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -17,4 +19,5 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
     ]) ?>
 
+</div>
 </div>

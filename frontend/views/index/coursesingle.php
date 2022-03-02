@@ -102,8 +102,8 @@ $comentsCount = count($comentsCount2);
 						<!-- reviewsList -->
 						<ul class="list-unstyled reviewsList">
 							
-			<?php foreach($coments as $coment)	{?>
-				<li>
+							<?php foreach($coments as $coment)	{?>
+							<li>
 								<div class="alignleft">
 									<a href="instructor-single.html"><img src="https://picsum.photos/50/50" alt="Lavin Duster"></a>
 								</div>
@@ -177,43 +177,9 @@ $comentsCount = count($comentsCount2);
 						</section>
 						<!-- widget popular posts -->
 						<section class="widget widget_popular_posts">
-							<h3>Popular Courses</h3>
-							<!-- widget cources list -->
-							<ul class="widget-cources-list list-unstyled">
-								<li>
-									<a href="course-single.html">
-										<div class="alignleft">
-											<img src="https://picsum.photos/60/60" alt="image description">
-										</div>
-										<div class="description-wrap">
-											<h4>Introduction to Mobile Apps Development</h4>
-											<strong class="price text-primary element-block font-lato text-uppercase">$99.00</strong>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="course-single.html">
-										<div class="alignleft">
-											<img src="https://picsum.photos/60/60" alt="image description">
-										</div>
-										<div class="description-wrap">
-											<h4>Become a Professional Film Maker</h4>
-											<strong class="price text-success element-block font-lato text-uppercase">Free</strong>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="course-single.html">
-										<div class="alignleft">
-											<img src="https://picsum.photos/60/60" alt="image description">
-										</div>
-										<div class="description-wrap">
-											<h4>Swift Programming For Beginners</h4>
-											<strong class="price text-primary element-block font-lato text-uppercase">$75.00</strong>
-										</div>
-									</a>
-								</li>
-							</ul>
+						<?php
+							include_once "populacours.php";
+						?>
 						</section>
 						<!-- widget tags -->
 						<nav class="widget widget_tags">

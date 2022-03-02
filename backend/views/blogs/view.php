@@ -13,6 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = 'blog';
 
 ?>
+<div class="box box-success box-body">
+
 <div class="blogs-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -80,4 +82,5 @@ $this->params['title'] = 'blog';
         ],
     ]) ?>
 
+</div>
 </div>

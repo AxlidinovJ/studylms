@@ -46,6 +46,11 @@ class RejalarSearch extends Rejalar
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'hour' => SORT_DESC,
+                ],
+            ],
         ]);
 
         $this->load($params);
@@ -59,9 +64,9 @@ class RejalarSearch extends Rejalar
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'hour' => $this->hour,
-            'user_id' => $this->user_id,
-            'created_at' => $this->created_at,
+            // 'hour' => $this->hour,
+            // 'user_id' => $this->user_id,
+            // 'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

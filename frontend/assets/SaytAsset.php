@@ -22,6 +22,7 @@ class SaytAsset extends AssetBundle
         'js/plugins.js',
         // 'js/jquery.js',
         'js/jquery.main.js',
+        'js/jk.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

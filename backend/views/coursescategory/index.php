@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = 'coursescategory';
 
 ?>
+<div class="box box-success box-body">
+
 <div class="courses-category-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -41,6 +43,6 @@ $this->params['title'] = 'coursescategory';
             ],
         ],
     ]); ?>
-
+</div>
 
 </div>

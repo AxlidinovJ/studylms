@@ -13,6 +13,8 @@ $this->params['title'] = 'blogcategory';
 
 \yii\web\YiiAsset::register($this);
 ?>
+<div class="box box-success box-body">
+
 <div class="blog-category-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -36,4 +38,4 @@ $this->params['title'] = 'blogcategory';
         ],
     ]) ?>
 
-</div>
+</div></div>

@@ -15,6 +15,8 @@ $this->params['title'] = 'xabarlar';
 $this->title = 'Xabarlars';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="box box-success box-body">
+
 <div class="xabarlar-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -73,4 +75,5 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 
+</div>
 </div>

@@ -40,8 +40,11 @@ class Rejalar extends \yii\db\ActiveRecord
         return [
             [['title', 'subtitle', 'img', 'content', 'hour', 'location'], 'required'],
             [['content', 'location'], 'string'],
-            [['hour', 'user_id', 'created_at'], 'integer'],
+            [['user_id', 'created_at'], 'integer'],
             [['title', 'subtitle', 'img'], 'string', 'max' => 255],
+            // ['hour','datetime'],
+            // ['hour', 'datetime', 'format' => 'd-m-y H:i'],
+
         ];
     }
 

@@ -75,7 +75,6 @@ class SliderController extends DefaultController
                 $nomi = $random->generateRandomString(32).".".$rasm->extension;
                 $rasm->saveAs("images/slider/".$nomi);
                 $model->photo = $nomi;
-                $model->user_id = Yii::$app->user->identity->id;
                 $model->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);

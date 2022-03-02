@@ -9,6 +9,7 @@ use common\models\Coment;
 use yii\helpers\Url;
 use common\models\Rejalar;
 use common\models\Slider;
+use common\models\Views;
 use common\models\Xabarlar;
 
 $sliders = Slider::find()->all();
@@ -19,7 +20,8 @@ $kurslarSoni = count(Courses::find()->all());
 $oqituvchilarSoni = count(User::find()->where('type=2')->all());
 $oquvchilarSoni = count(User::find()->where('type=3')->all());
 
-
+const COMENT_CATEGORY_COURS = 1;
+const COMENT_CATEGORY_BLOG = 2;
 
 ?>
 <!-- intro block -->
@@ -54,7 +56,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 				<aside class="features-aside">
 					<a href="#" class="col">
 						<span class="icn-wrap text-center no-shrink">
-							<img src="images/icon01.svg" width="44" height="43" alt="trophy">
+							<img src="<?=url::to("@web/")?>images/icon01.svg" width="44" height="43" alt="trophy">
 						</span>
 						<div class="description">
 							<h2 class="features-aside-heading">World’d Best Instructors</h2>
@@ -63,7 +65,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 					</a>
 					<a href="#" class="col">
 						<span class="icn-wrap text-center no-shrink">
-							<img src="images/icon02.svg" width="43" height="39" alt="computer">
+							<img src="<?=url::to("@web/")?>images/icon02.svg" width="43" height="39" alt="computer">
 						</span>
 						<div class="description">
 							<h2 class="features-aside-heading">Learn Courses Onlines</h2>
@@ -72,7 +74,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 					</a>
 					<a href="#" class="col">
 						<span class="icn-wrap text-center no-shrink">
-							<img src="images/icon03.svg" width="43" height="39" alt="computer">
+							<img src="<?=url::to("@web/")?>images/icon03.svg" width="43" height="39" alt="computer">
 						</span>
 						<div class="description">
 							<h2 class="features-aside-heading">Online Library &amp; Store</h2>
@@ -91,8 +93,15 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 				<!-- popular posts slider -->
 				<div class="slider popular-posts-slider">
                     <?php foreach ($courses as $course) {
-					$comentsCount2 = Coment::find()->where(['category_id'=>1])->andWhere(['coment_id'=>$course->id])->all();
+					$comentsCount2 = Coment::find()->where(['category_id'=>COMENT_CATEGORY_COURS])->andWhere(['coment_id'=>$course->id])->all();
 					$comentsCount = count($comentsCount2);
+
+					$view = Views::findOne([
+						'post_id'=>$course->id,
+						'category_id'=>COMENT_CATEGORY_COURS,
+					]);
+					$viewCount = $view->viewcount??"0";
+				
 						?>
 					<div>
 						<div class="col-xs-12">
@@ -116,7 +125,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 										<li>
 											<a href="#">
 												<span class="fas icn fa-users no-shrink"><span class="sr-only">users</span></span>
-												<strong class="text fw-normal"><.></strong>
+												<strong class="text fw-normal"><?=$viewCount?></strong>
 											</a>
 										</li>
 										<li>
@@ -241,7 +250,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 						<a href="#">
 							<div class="align">
 								<span class="icn-wrap">
-									<img src="images/icon04.svg" width="43" height="43" alt="image description">
+									<img src="<?=url::to("@web/")?>images/icon04.svg" width="43" height="43" alt="image description">
 								</span>
 								<strong class="h h5 element-block text-uppercase">Business</strong>
 							</div>
@@ -251,7 +260,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 						<a href="#">
 							<div class="align">
 								<span class="icn-wrap">
-									<img src="images/icon05.svg" width="44" height="48" alt="image description">
+									<img src="<?=url::to("@web/")?>images/icon05.svg" width="44" height="48" alt="image description">
 								</span>
 								<strong class="h h5 element-block text-uppercase">Language</strong>
 							</div>
@@ -261,7 +270,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 						<a href="#">
 							<div class="align">
 								<span class="icn-wrap">
-									<img src="images/icon06.svg" width="51" height="42" alt="image description">
+									<img src="<?=url::to("@web/")?>images/icon06.svg" width="51" height="42" alt="image description">
 								</span>
 								<strong class="h h5 element-block text-uppercase">Programming</strong>
 							</div>
@@ -271,7 +280,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 						<a href="#">
 							<div class="align">
 								<span class="icn-wrap">
-									<img src="images/icon07.svg" width="51" height="42" alt="image description">
+									<img src="<?=url::to("@web/")?>images/icon07.svg" width="51" height="42" alt="image description">
 								</span>
 								<strong class="h h5 element-block text-uppercase">Film &amp; Video</strong>
 							</div>
@@ -281,7 +290,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 						<a href="#">
 							<div class="align">
 								<span class="icn-wrap">
-									<img src="images/icon08.svg" width="51" height="39" alt="image description">
+									<img src="<?=url::to("@web/")?>images/icon08.svg" width="51" height="39" alt="image description">
 								</span>
 								<strong class="h h5 element-block text-uppercase">Photography</strong>
 							</div>
@@ -291,7 +300,7 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 						<a href="#">
 							<div class="align">
 								<span class="icn-wrap">
-									<img src="images/icon09.svg" width="51" height="51" alt="image description">
+									<img src="<?=url::to("@web/")?>images/icon09.svg" width="51" height="51" alt="image description">
 								</span>
 								<strong class="h h5 element-block text-uppercase">Web Design</strong>
 							</div>

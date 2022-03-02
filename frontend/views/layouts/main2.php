@@ -1,6 +1,7 @@
 <?php
 
 use frontend\assets\Sayt2Asset;
+use yii\bootstrap\Modal;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -21,6 +22,22 @@ Sayt2Asset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+<?php
+
+Modal::begin([
+    'header' => '<h2>Siz tanlagan maxsulotlar</h2>',
+	'id'=>"myModal",
+    'size'=>'modal-lg',
+    'footer'=>"<a href='".url::to(['card/clear'])."' class='btn btn-danger clear'>Tozalash</a>",
+
+]);
+
+echo "<div id='blok'></div>";
+
+Modal::end();
+
+?>
 
 <div id="wrapper">
 		<!-- header of the page -->
@@ -64,7 +81,7 @@ Sayt2Asset::register($this);
 						<div class="col-xs-6 col-sm-3">
 							<!-- logo -->
 							<div class="logo">
-								<a href="<?=url::home()?>">
+								<a href="<?=url::to(['index'])?>">
 									<img src="<?=url::to('/frontend/web/images/logo-dark.png')?>" alt="studylms">
 								</a>
 							</div>
@@ -84,7 +101,7 @@ Sayt2Asset::register($this);
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right main-navigation text-uppercase font-lato">
 										<li class="dropdown">
-											<a href="<?=url::home()?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">home</a>
+											<a href="<?=url::to(['index'])?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">home</a>
 										</li>
 										<li class="dropdown">
 											<a href="<?=url::to(['courseslist'])?>" class="dropdown-toggle">Courses</a>
@@ -112,7 +129,7 @@ Sayt2Asset::register($this);
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 											<ul class="dropdown-menu">
 												<li><a href="<?=url::to(['index/shop'])?>">Shop List</a></li>
-												<li><a href="<?=url::to(['index/cartage'])?>">Cart Page</a></li>
+												<li><a href="#" onclick="show()">Cart Page</a></li>
 												<li><a href="<?=url::to(['index/checkout'])?>">Checkout</a></li>
 											</ul>
 										</li>
@@ -169,7 +186,7 @@ Sayt2Asset::register($this);
 			<aside class="aside container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-3 col">
-						<div class="logo"><a href="home"><img src="images/logo.png" alt="studyLMS"></a></div>
+						<div class="logo"><a href="<?=url::to(['index'])?>"><img src="images/logo.png" alt="studyLMS"></a></div>
 						<p>We have over 20 years experience providing expert Educational both businesses and individuals. Our Investment Committee brings cades the industry expertise in driving our investment approach. portfolio constructor and allocation</p>
 						<a href="#" class="btn btn-default text-uppercase">Start Leaning Now</a>
 					</div>

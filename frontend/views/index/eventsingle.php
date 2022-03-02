@@ -83,9 +83,8 @@ use yii\helpers\Url;
 				work along side partners, both financial and commercial, to get his inventions.</p>
 			mapHolder -->
 			<div class="mapHolder">
-				<span class="mapMarker"><img src="<?=url::to('/images/map-marker.png')?>" alt="marker"></span>
-				<iframe	src="<?=$reja->location?>"
-					style="border:0" allowfullscreen="" width="100%" height="300" frameborder="0"></iframe>
+				<!-- <span class="mapMarker"><img src="<?=url::to('/images/map-marker.png')?>" alt="marker"></span> -->
+				<?=$reja->location?>
 			</div>
 			<div class="bookmarkFoot">
 				<div class="bookmarkCol">
@@ -132,45 +131,9 @@ use yii\helpers\Url;
 			</section>
 			<!-- widget popular posts -->
 			<section class="widget widget_popular_posts">
-				<h3>Popular Courses</h3>
-				<!-- widget cources list -->
-				<ul class="widget-cources-list list-unstyled">
-					<li>
-						<a href="course-single.html">
-							<div class="alignleft">
-								<img src="http://placehold.it/60x60" alt="image description">
-							</div>
-							<div class="description-wrap">
-								<h4>Introduction to Mobile Apps Development</h4>
-								<strong
-									class="price text-primary element-block font-lato text-uppercase">$99.00</strong>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="course-single.html">
-							<div class="alignleft">
-								<img src="http://placehold.it/60x60" alt="image description">
-							</div>
-							<div class="description-wrap">
-								<h4>Become a Professional Film Maker</h4>
-								<strong class="price text-success element-block font-lato text-uppercase">Free</strong>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="course-single.html">
-							<div class="alignleft">
-								<img src="http://placehold.it/80x70" alt="image description">
-							</div>
-							<div class="description-wrap">
-								<h4>Swift Programming For Beginners</h4>
-								<strong
-									class="price text-primary element-block font-lato text-uppercase">$75.00</strong>
-							</div>
-						</a>
-					</li>
-				</ul>
+					<?php
+							include_once "populacours.php";
+						?>
 			</section>
 			<!-- widget archives -->
 			<section class="widget widget_archives">

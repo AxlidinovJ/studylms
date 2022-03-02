@@ -17,7 +17,7 @@ class CoursesSearch extends Courses
     public function rules()
     {
         return [
-            [['id', 'category_id', 'star', 'view', 'price', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'category_id','price', 'created_at', 'updated_at'], 'integer'],
             [['title', 'instruktor', 'img', 'content'], 'safe'],
             [['created_by','updated_by'],'string'],
         ];
@@ -61,8 +61,6 @@ class CoursesSearch extends Courses
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-            'star' => $this->star,
-            'view' => $this->view,
             'price' => $this->price,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

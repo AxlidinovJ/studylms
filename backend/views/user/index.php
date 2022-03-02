@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\UserSearch */
@@ -15,11 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = 'user';
 
 ?>
+<div class="box box-success box-body">
+
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Pjax::begin();?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -77,16 +81,7 @@ $this->params['title'] = 'user';
         ],
     ]); ?>
 
+<?php Pjax::end();?>
 
 </div>
-<?php
-switch ($variable) {
-    case 'value':
-        # code...
-        break;
-    
-    default:
-        # code...
-        break;
-}
-?>
+</div>

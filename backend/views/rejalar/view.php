@@ -12,6 +12,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Rejalars', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<div class="box box-success box-body">
+
 <div class="rejalar-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -35,11 +37,33 @@ $this->params['breadcrumbs'][] = $this->title;
             'subtitle',
             'img',
             'content:ntext',
-            'hour',
+            // 'hour',
+            [
+                'attribute'=>'hour',
+                'label'=>'Bo\'lish vaqti',
+                'value'=>function($model){
+                    return date('d-m-Y H:i',$model->hour);
+                }
+            ],
             'location:ntext',
             'user_id',
-            'created_at',
+            // 'created_at',
+            [
+                'attribute'=>'created_at',
+                'label'=>'Yaratilish vaqti',
+                'value'=>function($model){
+                    return date('d-m-Y H:i',$model->created_at);
+                }
+            ],
+            [
+                'attribute'=>'updated_at',
+                'label'=>'Taxrirlanish vaqti',
+                'value'=>function($model){
+                    return date('d-m-Y H:i',$model->updated_at);
+                }
+            ],
         ],
     ]) ?>
 
+</div>
 </div>

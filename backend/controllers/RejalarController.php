@@ -65,14 +65,18 @@ class RejalarController extends DefaultController
                 $rasm->saveAs("photos/".$nomi);
                 $model->img = $nomi;
                 $model->user_id = Yii::$app->user->identity->id;
+                $vaqt = strtotime($model->hour);
+                $model->hour = $vaqt;
                 $model->save();
+                // echo "<pre>";
+                // print_r($model);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
 
         } else {
             $model->loadDefaultValues();
         }
-
+       
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -100,6 +104,8 @@ class RejalarController extends DefaultController
                     $rasm->saveAs("photos/".$nomi);
                 }
                 $model->img = $nomi;
+                $vaqt = strtotime($model->hour);
+                $model->hour = $vaqt;
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }

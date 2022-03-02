@@ -190,6 +190,22 @@ $admin  =  yii::$app->user->identity;
                         </a>
                     </li>
 
+                    <li class="<?=$this->params['title']=='shopcategory'?'active':''?>">
+                        <a href="<?=url::to(['/shopcategory/index'])?>">
+                            <i class="fa fa-dashboard"></i> <span>Shopcategory</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="<?=$this->params['title']=='shop'?'active':''?>">
+                        <a href="<?=url::to(['/shop/index'])?>">
+                            <i class="fa fa-dashboard"></i> <span>Shop</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+
                 </ul>
                 
 

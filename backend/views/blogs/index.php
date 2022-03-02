@@ -15,6 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = 'blog';
 
 ?>
+<div class="box box-success box-body">
+
 <div class="blogs-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -48,12 +50,12 @@ $this->params['title'] = 'blog';
                     return Html::img('/backend/web/images/blogs/'.$data->img,['width'=>'100px']);
                 }
             ],
-            [
-                'value'=>function($data){
-                    return html::a("salom", );
-                },
-                'label'=>"Yuklab olish",
-            ],
+            // [
+            //     'value'=>function($data){
+            //         return html::a("salom", );
+            //     },
+            //     'label'=>"Yuklab olish",
+            // ],
             // 'content:ntext',
             //'created_at',
             [
@@ -81,4 +83,5 @@ $this->params['title'] = 'blog';
     ]); ?>
 
 
+</div>
 </div>

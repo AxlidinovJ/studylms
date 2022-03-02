@@ -14,16 +14,18 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['title'] = 'slider';
 
 ?>
-<div class="slider-index">
+<div class="box box-success box-body">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="slider-index">
 
-    <p>
-        <?= Html::a('Create Slider', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <h1><?= Html::encode($this->title) ?></h1>
+
+        <p>
+            <?= Html::a('Create Slider', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
 
 
-    <?= GridView::widget([
+        <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -41,5 +43,6 @@ $this->params['title'] = 'slider';
         ],
     ]); ?>
 
+    </div>
 
 </div>

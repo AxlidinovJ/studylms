@@ -9,12 +9,15 @@ $this->title = 'Create Slider';
 $this->params['breadcrumbs'][] = ['label' => 'Sliders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="slider-create">
+<div class="box box-success box-body">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="slider-create">
 
-    <?= $this->render('_form', [
+        <h1><?= Html::encode($this->title) ?></h1>
+
+        <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
 
+    </div>
 </div>

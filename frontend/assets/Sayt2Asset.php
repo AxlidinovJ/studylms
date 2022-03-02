@@ -20,11 +20,12 @@ class Sayt2Asset extends AssetBundle
     ];
     public $js = [
         'js/plugins.js',
-        // 'js/jquery.js',
+//         'js/jquery.js',
         'js/jquery.main.js',
+        'js/jk.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        // 'yii\bootstrap4\BootstrapAsset',
+//         'yii\bootstrap4\BootstrapAsset',
     ];
 }

@@ -10,6 +10,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Blog Categories', 'url' => ['index
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
+<div class="box box-success box-body">
+
 <div class="blog-category-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -18,4 +20,5 @@ $this->params['breadcrumbs'][] = 'Update';
         'model' => $model,
     ]) ?>
 
+</div>
 </div>
