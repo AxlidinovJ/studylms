@@ -9,6 +9,15 @@ use yii\filters\VerbFilter;
 
 class DefaultController extends Controller
 {
+
+
+    public function beforeAction($action){            
+        if ($action->id == 'delete') {
+            $this->enableCsrfValidation = false;
+        }
+        return true;
+    }
+
     public function behaviors()
     {
         return [

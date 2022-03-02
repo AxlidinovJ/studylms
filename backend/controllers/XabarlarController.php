@@ -4,32 +4,13 @@ namespace backend\controllers;
 
 use common\models\Xabarlar;
 use common\models\XabarlarSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * XabarlarController implements the CRUD actions for Xabarlar model.
  */
-class XabarlarController extends Controller
+class XabarlarController extends DefaultController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
 
     /**
      * Lists all Xabarlar models.

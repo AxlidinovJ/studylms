@@ -11,7 +11,7 @@ function showcard(){
         url:'/card/show',
         type: 'GET',
         success: function (res){
-            show(res);
+           show(res);
         },
         error: function (){
             console.log("xatolik");

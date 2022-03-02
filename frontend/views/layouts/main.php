@@ -2,8 +2,11 @@
 
 use frontend\assets\SaytAsset;
 use yii\bootstrap4\Breadcrumbs;
+use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\helpers\Html;
+use lavrentiev\widgets\toastr\Notification;
+
 
 SaytAsset::register($this);
 ?>
@@ -12,6 +15,7 @@ SaytAsset::register($this);
 <html lang="<?= Yii::$app->language ?>" class="h-100">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
+	<title><?= Html::encode($this->title) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
@@ -20,6 +24,22 @@ SaytAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
+
+<?php
+
+Modal::begin([
+    'header' => '<h2>Siz tanlagan maxsulotlar</h2>',
+	'id'=>"myModal",
+    'size'=>'modal-lg',
+    'footer'=>"<a href='".url::to(['card/checkout'])."' class='btn btn-success'>Zakaz qilish</a><a href='".url::to(['card/clear'])."' class='btn btn-danger clear'>Tozalash</a>",
+
+]);
+
+echo "<div id='blok'></div>";
+
+Modal::end();
+
+?>
 
 	<!-- main container of all the page elements -->
 	<div id="wrapper">
@@ -115,8 +135,8 @@ SaytAsset::register($this);
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 											<ul class="dropdown-menu">
 												<li><a href="<?=url::to(['index/shop'])?>">Shop List</a></li>
-												<li><a href="<?=url::to(['index/cartage'])?>">Cart Page</a></li>
-												<li><a href="<?=url::to(['index/checkout'])?>">Checkout</a></li>
+												<li><a href="#" onclick="showcard()">Cart Page</a></li>
+												<li><a href="<?=url::to(['card/checkout'])?>">Checkout</a></li>
 											</ul>
 										</li>
 										<li><a href="<?=url::to(['index/contact'])?>">CONTACT</a></li>
@@ -295,6 +315,25 @@ SaytAsset::register($this);
 			</form>
 		</div>
 	</div>
+	<?= \lavrentiev\widgets\toastr\NotificationFlash::widget([
+    'options' => [
+        "closeButton" => true,
+        "debug" => false,
+        "newestOnTop" => false,
+        "progressBar" => false,
+        "positionClass" => \lavrentiev\widgets\toastr\NotificationFlash::POSITION_TOP_RIGHT,
+        "preventDuplicates" => false,
+        "onclick" => null,
+        "showDuration" => "300",
+        "hideDuration" => "1000",
+        "timeOut" => "10000",
+        "extendedTimeOut" => "1000",
+        "showEasing" => "swing",
+        "hideEasing" => "linear",
+        "showMethod" => "fadeIn",
+        "hideMethod" => "fadeOut"
+    ]
+]) ?>
     <?php $this->endBody() ?>
 </body>
 </html>

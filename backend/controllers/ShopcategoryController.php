@@ -11,31 +11,9 @@ use yii\filters\VerbFilter;
 /**
  * ShopcategoryController implements the CRUD actions for ShopCategory model.
  */
-class ShopcategoryController extends Controller
+class ShopcategoryController extends DefaultController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST','GET'],
-                    ],
-                ],
-            ]
-        );
-    }
-
-    /**
-     * Lists all ShopCategory models.
-     *
-     * @return string
-     */
+   
     public function actionIndex()
     {
         $searchModel = new ShopCategorySearch();

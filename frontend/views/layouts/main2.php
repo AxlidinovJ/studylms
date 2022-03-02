@@ -5,7 +5,7 @@ use yii\bootstrap\Modal;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 use yii\helpers\Html;
-
+use lavrentiev\widgets\toastr\Notification;
 
 Sayt2Asset::register($this);
 ?>
@@ -16,6 +16,7 @@ Sayt2Asset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
+	<title><?= Html::encode($this->title) ?></title>
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
     <?php $this->head() ?>
 
@@ -29,7 +30,7 @@ Modal::begin([
     'header' => '<h2>Siz tanlagan maxsulotlar</h2>',
 	'id'=>"myModal",
     'size'=>'modal-lg',
-    'footer'=>"<a href='".url::to(['card/clear'])."' class='btn btn-danger clear'>Tozalash</a>",
+    'footer'=>"<a href='".url::to(['card/checkout'])."' class='btn btn-success'>Zakaz qilish</a><a href='".url::to(['card/clear'])."' class='btn btn-danger clear'>Tozalash</a>",
 
 ]);
 
@@ -81,7 +82,7 @@ Modal::end();
 						<div class="col-xs-6 col-sm-3">
 							<!-- logo -->
 							<div class="logo">
-								<a href="<?=url::to(['index'])?>">
+								<a href="<?=url::to(['index/index'])?>">
 									<img src="<?=url::to('/frontend/web/images/logo-dark.png')?>" alt="studylms">
 								</a>
 							</div>
@@ -101,13 +102,13 @@ Modal::end();
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav navbar-right main-navigation text-uppercase font-lato">
 										<li class="dropdown">
-											<a href="<?=url::to(['index'])?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">home</a>
+											<a href="<?=url::to(['index/index'])?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">home</a>
 										</li>
 										<li class="dropdown">
-											<a href="<?=url::to(['courseslist'])?>" class="dropdown-toggle">Courses</a>
+											<a href="<?=url::to(['index/courseslist'])?>" class="dropdown-toggle">Courses</a>
 										</li>
 										<li class="dropdown">
-											<a href="<?=url::to(['eventslist'])?>" class="dropdown-toggle">Events</a>
+											<a href="<?=url::to(['index/eventslist'])?>" class="dropdown-toggle">Events</a>
 										</li>
 										<li class="dropdown">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -129,8 +130,8 @@ Modal::end();
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 											<ul class="dropdown-menu">
 												<li><a href="<?=url::to(['index/shop'])?>">Shop List</a></li>
-												<li><a href="#" onclick="show()">Cart Page</a></li>
-												<li><a href="<?=url::to(['index/checkout'])?>">Checkout</a></li>
+												<li><a href="#" onclick="showcard()">Cart Page</a></li>
+												<li><a href="<?=url::to(['card/checkout'])?>">Checkout</a></li>
 											</ul>
 										</li>
 										<li><a href="<?=url::to(['index/contact'])?>">CONTACT</a></li>
@@ -186,7 +187,7 @@ Modal::end();
 			<aside class="aside container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-3 col">
-						<div class="logo"><a href="<?=url::to(['index'])?>"><img src="images/logo.png" alt="studyLMS"></a></div>
+						<div class="logo"><a href="<?=url::to(['index/index'])?>"><img src="images/logo.png" alt="studyLMS"></a></div>
 						<p>We have over 20 years experience providing expert Educational both businesses and individuals. Our Investment Committee brings cades the industry expertise in driving our investment approach. portfolio constructor and allocation</p>
 						<a href="#" class="btn btn-default text-uppercase">Start Leaning Now</a>
 					</div>
@@ -330,6 +331,25 @@ Modal::end();
 		</div>
 	</div>
 
+	<?= \lavrentiev\widgets\toastr\NotificationFlash::widget([
+    'options' => [
+        "closeButton" => true,
+        "debug" => false,
+        "newestOnTop" => false,
+        "progressBar" => false,
+        "positionClass" => \lavrentiev\widgets\toastr\NotificationFlash::POSITION_TOP_RIGHT,
+        "preventDuplicates" => false,
+        "onclick" => null,
+        "showDuration" => "300",
+        "hideDuration" => "1000",
+        "timeOut" => "10000",
+        "extendedTimeOut" => "1000",
+        "showEasing" => "swing",
+        "hideEasing" => "linear",
+        "showMethod" => "fadeIn",
+        "hideMethod" => "fadeOut"
+    ]
+]) ?>
     <?php $this->endBody() ?>
 </body>
 </html>

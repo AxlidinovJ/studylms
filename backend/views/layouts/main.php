@@ -206,6 +206,14 @@ $admin  =  yii::$app->user->identity;
                         </a>
                     </li>
 
+                    <li class="<?=$this->params['title']=='order'?'active':''?>">
+                        <a href="<?=url::to(['/order/index'])?>">
+                            <i class="fa fa-dashboard"></i> <span>Buyurtmalar</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+
                 </ul>
                 
 

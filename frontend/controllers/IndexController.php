@@ -25,7 +25,7 @@ consT COMENT_CATEGORY_SHOP = 3;
 class IndexController extends Controller
 {
 
-   
+
     public function actionIndex()
     {
         $courses = Courses::find()->limit(4)->all();
@@ -262,10 +262,6 @@ class IndexController extends Controller
         return $this->renderAjax('cartage');
     }
 
-    public function actionCheckout()
-    {
-        $this->layout = "main2";
-        return $this->render('checkout');
-    }
+
 
 }

@@ -23,6 +23,9 @@ $oquvchilarSoni = count(User::find()->where('type=3')->all());
 const COMENT_CATEGORY_COURS = 1;
 const COMENT_CATEGORY_BLOG = 2;
 
+$this->title = "STUDYLMS";
+
+
 ?>
 <!-- intro block -->
 <section class="intro-block">

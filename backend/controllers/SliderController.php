@@ -6,10 +6,7 @@ use common\models\Slider;
 use Yii;
 use yii\base\Security;
 use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
@@ -19,12 +16,6 @@ class SliderController extends DefaultController
 {
   
 
-
-    /**
-     * Lists all Slider models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([

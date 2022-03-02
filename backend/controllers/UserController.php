@@ -4,10 +4,7 @@ namespace backend\controllers;
 
 use backend\models\User;
 use backend\models\UserSearch;
-use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.

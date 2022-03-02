@@ -13,38 +13,10 @@ use yii\web\UploadedFile;
 /**
  * ShopController implements the CRUD actions for Shop model.
  */
-class ShopController extends Controller
+class ShopController extends DefaultController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return 
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ];
-        
-    }
+ 
 
-    public function beforeAction($action)
-    {
-        if($action->id == 'delete'){
-            $this->enableCsrfValidation = false;
-        }
-        return true;
-    }
-
-    /**
-     * Lists all Shop models.
-     *
-     * @return string
-     */
     public function actionIndex()
     {
         $searchModel = new ShopSearch();
