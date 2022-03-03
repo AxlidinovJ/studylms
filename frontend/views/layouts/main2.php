@@ -2,6 +2,7 @@
 
 use frontend\assets\Sayt2Asset;
 use yii\bootstrap\Modal;
+
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -26,6 +27,7 @@ Sayt2Asset::register($this);
 
 <?php
 
+
 Modal::begin([
     'header' => '<h2>Siz tanlagan maxsulotlar</h2>',
 	'id'=>"myModal",
@@ -38,7 +40,26 @@ echo "<div id='blok'></div>";
 
 Modal::end();
 
+
+
+Modal::begin([
+	'id'=>"loginModal",
+    'size'=>'modal-md',
+]);
+echo "<div id='blok1'></div>";
+Modal::end();
+
+
+Modal::begin([
+	'id'=>"signupModal",
+    'size'=>'modal-md',
+]);
+echo "<div id='blok2'></div>";
+Modal::end();
+
+
 ?>
+
 
 <div id="wrapper">
 		<!-- header of the page -->
@@ -134,10 +155,14 @@ Modal::end();
 												<li><a href="<?=url::to(['card/checkout'])?>">Checkout</a></li>
 											</ul>
 										</li>
-										<li><a href="<?=url::to(['index/contact'])?>">CONTACT</a></li>
-										<?php if(!Yii::$app->user->isGuest){?>
-										<li><a href="<?=url::to(['site/logout'])?>">Chiqish {<?=yii::$app->user->identity->username?>}</a></li>
-										<?php } ?>
+										<li class="dropdown"><a href="<?=url::to(['index/contact'])?>">CONTACT</a></li>
+										<?php if(!Yii::$app->user->isGuest):?>
+										<form action="<?=Url::to(['site/logout'])?>" method="post" class="d-none">
+											  <input type="hidden" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
+												<?=Html::submitInput("Chiqish {".yii::$app->user->identity->username."}")?>
+										</form>
+										<?php endif; ?>
+
 									</ul>
 								</div>
 								<!-- navbar form -->
@@ -350,7 +375,10 @@ Modal::end();
         "hideMethod" => "fadeOut"
     ]
 ]) ?>
+
+
+
     <?php $this->endBody() ?>
 </body>
 </html>
-<?php $this->endPage();
+<?php $this->endPage();?>

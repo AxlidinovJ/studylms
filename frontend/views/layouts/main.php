@@ -32,12 +32,25 @@ Modal::begin([
 	'id'=>"myModal",
     'size'=>'modal-lg',
     'footer'=>"<a href='".url::to(['card/checkout'])."' class='btn btn-success'>Zakaz qilish</a><a href='".url::to(['card/clear'])."' class='btn btn-danger clear'>Tozalash</a>",
-
 ]);
-
 echo "<div id='blok'></div>";
-
 Modal::end();
+
+Modal::begin([
+	'id'=>"loginModal",
+    'size'=>'modal-md',
+]);
+echo "<div id='blok1'></div>";
+Modal::end();
+
+
+Modal::begin([
+	'id'=>"signupModal",
+    'size'=>'modal-md',
+]);
+echo "<div id='blok2'></div>";
+Modal::end();
+
 
 ?>
 
@@ -71,7 +84,7 @@ Modal::end();
 						<div class="col-xs-3 col justify-end">
 							<!-- user links -->
 							<ul class="list-unstyled user-links fw-bold font-lato">
-								<li><a href="#popup1" class="lightbox">Login</a> <span class="sep">|</span> <a href="#popup2" class="lightbox">Register</a></li>
+								<li><a href="#" id='login' onclick="showLogin()" class="">Login</a> <span class="sep">|</span> <a href="#" onclick="showSignup()" id='regster' class="">Register</a></li>
 							</ul>
 						</div>
 					</div>
@@ -84,7 +97,7 @@ Modal::end();
 						<div class="col-xs-6 col-sm-3">
 							<!-- logo -->
 							<div class="logo">
-								<a href="<?=url::home()?>">
+								<a href="<?=url::to(['index/index'])?>">
 									<img class="hidden-xs" src="<?=url::to("/frontend/web/images/logo.png")?>" alt="studylms">
 									<img class="hidden-sm hidden-md hidden-lg" src="<?=url::to("/frontend/web/images/logo-dark.png")?>" alt="studylms">
 								</a>
@@ -107,7 +120,7 @@ Modal::end();
 									<!-- main navigation -->
 									<ul class="nav navbar-nav navbar-right main-navigation text-uppercase font-lato">
 										<li class="dropdown">
-											<a href="<?=url::home()?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">home</a>
+											<a href="<?=url::to(['index/index'])?>" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">home</a>
 										</li>
 										<li class="dropdown">
 											<a href="<?=url::to(['courseslist'])?>" class="dropdown-toggle">Courses</a>

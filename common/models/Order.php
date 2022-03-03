@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "order".
@@ -30,14 +31,19 @@ class Order extends \yii\db\ActiveRecord
         return 'order';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     public function rules()
     {
         return [
-            [['phone', 'status'], 'integer'],
+            [['phone', 'status','created_at','updated_at'], 'integer'],
             [['first_name', 'last_name', 'email'], 'string', 'max' => 255],
+            ['phone', 'string', 'max' => 11,'min'=>7],
             [['first_name','last_name', 'email','phone'],'required'],
             ['email','email'],
         ];
@@ -55,6 +61,8 @@ class Order extends \yii\db\ActiveRecord
             'email' => 'Email',
             'phone' => 'Phone',
             'status' => 'Status',
+            'created_at'=>"Yaratilgam vaqti",
+            'updated_at'=>"Taxrirlangan vaqti",
         ];
     }
 

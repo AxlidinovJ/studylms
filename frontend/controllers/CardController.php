@@ -66,13 +66,19 @@ class CardController extends Controller{
             }
             unset($session['card']);
             Yii::$app->session->setFlash('success','Buyutmangiz qabul qilindi');
-            return $this->redirect(['card/checkout']);
+            return $this->redirect(['index/shop']);
         }elseif(!isset($session['card']) and $order->load(Yii::$app->request->post())){
             Yii::$app->session->setFlash('danger','Nimadur xato ketdi');
             return $this->redirect(['card/checkout']);
         }
 
-        return $this->render('checkout',['model'=>$order]);
+        if(isset($session['card'])){
+            return $this->render('checkout',['model'=>$order]);
+        }else{
+            Yii::$app->session->setFlash('warning','Iltimos biror nima tanlang');
+            return $this->redirect(['index/shop']);
+
+        }
     }
 
 

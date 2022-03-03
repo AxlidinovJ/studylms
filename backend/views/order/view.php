@@ -64,7 +64,13 @@ $order_item = OrderItem::find()->where(['order_id'=>$model->id])->all();
             <th>Puli</th>
             <th>Jami</th>
         </tr>
-<?php $n=0; foreach($order_item as $order){ $n++;?>
+<?php $n=0;$sum =0;$count =0; 
+    foreach($order_item as $order){ 
+    $n++;   
+    $sum +=$order->sum* $order->count;
+    $count +=$order->count;
+
+    ?>
         <tr>
         <td><?=$n?></td>
         <td><?=\yii\helpers\Html::img(\yii\helpers\Url::to("/backend/web/images/shop/".$order->product->img),['alt'=>"salom",'width'=>'100px'])?></td>
@@ -72,10 +78,18 @@ $order_item = OrderItem::find()->where(['order_id'=>$model->id])->all();
         <td><?=$order->count?></td>
         <td><?=$order->price?></td>
         <td><?=$order->sum?></td>
-            
         </tr>
 <?php }?>
+        <tr>
+            <td colspan="5" class="text-center">Jami maxsulotlari soni</td>
+            <td><?=$count?></td>
 
+        </tr>
+        <tr>
+            <td colspan="5" class="text-center">Jami maxsulotlari summasi</td>
+
+            <td><?=$sum?></td>
+        </tr>
 
 </table>
 

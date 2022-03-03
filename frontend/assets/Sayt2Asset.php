@@ -12,7 +12,7 @@ class Sayt2Asset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-            "css/bootstrap.css",
+            // "css/bootstrap.css",
 	        "css/plugins.css",
 	        "css/colors.css",
 	        "style.css",
@@ -26,6 +26,6 @@ class Sayt2Asset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-//         'yii\bootstrap4\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }

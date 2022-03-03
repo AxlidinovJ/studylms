@@ -9,13 +9,9 @@ use common\models\Coment;
 use common\models\Rejalar;
 use common\models\Shop;
 use common\models\Views;
-use frontend\models\ComentForm;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\db\ActiveRecord;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
-use yii\web\ErrorAction;
 use yii\web\NotFoundHttpException;
 
 const COMENT_CATEGORY_COURS = 1;
@@ -236,22 +232,40 @@ class IndexController extends Controller
         }
     }
 
-    public function actionLoginregister()
-    {
-        $this->layout = "main2";
-        return $this->render('loginregister');
-    }
+        public function actionLoginregister()
+        {
+            $this->layout = "main2";
+            $model = new User();
+            return $this->render('loginregister',['model'=>$model]);
+        }
 
+   
 
     public function actionShop()
     {
         $this->layout = "main2";
-        $data  = new ActiveDataProvider([
-            'query'=>Shop::find(),
-            'pagination'=>[
-                'pageSize'=>6,
-            ],
-        ]);
+       
+        $max = Yii::$app->request->get('max');
+        $min = Yii::$app->request->get('min');
+
+        if($max>0 and $min>10 and $max>$min and $max<10000){
+            $data  = new ActiveDataProvider([
+                'query'=>Shop::find()->where("price>=$min")->andWhere("price<=$max"),
+                'pagination'=>[
+                    'pageSize'=>6,
+                ],
+            ]);
+        }else{
+            $data  = new ActiveDataProvider([
+                'query'=>Shop::find(),
+                'pagination'=>[
+                    'pageSize'=>6,
+                ],
+            ]);
+
+        }
+        
+
         return $this->render('shop',['dataProvider'=>$data]);
     }
 

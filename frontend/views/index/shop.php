@@ -76,20 +76,23 @@ use yii\widgets\ListView;
             </section>
             <!-- pricing filter widget -->
             <section class="widget pricing_filter_widget">
+                <?php 
+                      $max = Yii::$app->request->get('max',200);
+                      $min = Yii::$app->request->get('min',10);
+                ?>
                 <h3>Pricing Filter</h3>
                 <!-- filter ranger form -->
-                <form action="#" class="filter-ranger-form">
+                <form action="<?=url::to(['index/shop'])?>" class="filter-ranger-form">
                     <div id="slider-range"
                         class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                        <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 2.8%; width: 4.2%;">
-                        </div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
+                        <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
                             style="left: 2.8%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all"
                             tabindex="0" style="left: 7%;"></span>
                     </div>
-                    <input type="hidden" id="amount1" name="amount1" value="14">
-                    <input type="hidden" id="amount2" name="amount2" value="35">
+                    <input type="hidden" id="amount1" name="min" value="<?=$min?>">
+                    <input type="hidden" id="amount2" name="max" value="<?=$max?>">
                     <div class="get-results-wrap">
-                        <button type="button" class="btn btn-default text-uppercase">Filter</button>
+                        <button type="submit" class="btn btn-default text-uppercase">Filter</button>
                         <p id="amount" class="font-lato">Price Range : $14 - $35</p>
                     </div>
                 </form>

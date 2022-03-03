@@ -55,6 +55,7 @@ class BlogsController extends DefaultController
     public function actionCreate()
     {
         $model = new Blogs();
+        $model->scenario = Blogs::CREATED_BLOG;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
@@ -85,6 +86,7 @@ class BlogsController extends DefaultController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Blogs::UPDATED_BLOG;
 
         $nomi = $model->img; 
         if ($this->request->isPost) {

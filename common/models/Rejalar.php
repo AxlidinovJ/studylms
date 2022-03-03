@@ -48,9 +48,17 @@ class Rejalar extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    const CREATED_REJA = 'created';
+    const UPDATED_REJA = 'updated';
+    
+    public function scenarios()
+    {
+        return [
+            self::CREATED_REJA =>['title', 'subtitle', 'img', 'content', 'hour', 'location'],
+            self::UPDATED_REJA =>['title', 'subtitle', 'content', 'hour', 'location'],
+        ];
+    }
+
     public function attributeLabels()
     {
         return [

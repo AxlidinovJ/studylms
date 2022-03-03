@@ -68,3 +68,35 @@ $(document).ready(function(){
 
 
 });
+
+
+
+function show1(card){
+    $("#blok1").html(card);
+    $('#loginModal').modal();
+}
+
+function show2(card){
+    $("#blok2").html(card);
+    $('#signupModal').modal();
+}
+
+function showLogin(){
+    $.ajax({
+        url:'/site/login1',
+        type: 'GET',
+        success: function (res){
+           show1(res);
+        },
+    });
+}
+
+function showSignup(){
+    $.ajax({
+        url:'/site/signup1',
+        type: 'GET',
+        success: function (res){
+           show2(res);
+        },
+    });
+}

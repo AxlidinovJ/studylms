@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-$this->params['title'] = 'reja';
+$this->params['title'] = 'user';
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\User */

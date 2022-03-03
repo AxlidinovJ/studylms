@@ -49,7 +49,7 @@ class ShopController extends DefaultController
     public function actionCreate()
     {
         $model = new Shop();
-
+        $model->scenario = Shop::CREATED_SHOP;
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $rasm = UploadedFile::getInstance($model,'img');
@@ -79,6 +79,7 @@ class ShopController extends DefaultController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Shop::UPDATED_SHOP;
 
         $nomi = $model->img; 
         if ($this->request->isPost) {

@@ -24,7 +24,7 @@ class Shop extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title','content','img','price'], 'required'],
+            [['title','content','img','price','category_id'], 'required'],
             [['category_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['title','content'], 'string', 'max' => 255],
             ['price','integer'],
@@ -35,6 +35,16 @@ class Shop extends \yii\db\ActiveRecord
         ];
     }
 
+    const CREATED_SHOP = 'created';
+    const UPDATED_SHOP = 'updated';
+    
+    public function scenarios()
+    {
+        return [
+            self::CREATED_SHOP =>['title','content','img','price','category_id'],
+            self::UPDATED_SHOP =>['title','content','price','category_id'],
+        ];
+    }
 
     public function attributeLabels()
     {

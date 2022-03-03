@@ -27,6 +27,7 @@ class Blogs extends \yii\db\ActiveRecord
         ];
     }
 
+
     public function rules()
     {
         return [
@@ -38,9 +39,18 @@ class Blogs extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    const CREATED_BLOG = 'created';
+    const UPDATED_BLOG = 'updated';
+    
+    public function scenarios()
+    {
+        return [
+            self::CREATED_BLOG =>['title', 'category_id', 'img', 'content'],
+            self::UPDATED_BLOG =>['title', 'category_id', 'content'],
+        ];
+    }
+
+
     public function attributeLabels()
     {
         return [

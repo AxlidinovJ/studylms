@@ -56,7 +56,7 @@ class RejalarController extends DefaultController
     public function actionCreate()
     {
         $model = new Rejalar();
-
+        $model->scenario = Rejalar::CREATED_REJA;
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $rasm = UploadedFile::getInstance($model,'img');
@@ -92,7 +92,7 @@ class RejalarController extends DefaultController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->scenario = Rejalar::UPDATED_REJA;
         $nomi = $model->img; 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {

@@ -1,4 +1,8 @@
 <?php
+
+use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Html;
+
 $this->title  = "Instructors";
 $this->params['title'] = $this->title; 
 $this->params['breadscrumb'] = $this->title;
@@ -8,51 +12,65 @@ $this->params['breadscrumb'] = $this->title;
     <div class="row">
         <div class="col-xs-12 col-md-6">
             <!-- user log form -->
-            <form action="#" class="user-log-form">
+            <?php 
+                $form = ActiveForm::begin([
+                            'options'=>[
+                                'class'=>'user-log-form',
+                            ],
+                            'fieldConfig' => [
+                                'template' => "\n{beginWrapper}\n{input}\n{error}\n{endWrapper}",
+                               
+                            ],
+                ]);
+                ?>
                 <h2>Login Form</h2>
                 <div class="form-group">
-                    <input type="text" class="form-control element-block" placeholder="Username or email address *">
+                    <?=$form->field($model,'username', ['options' => ['class' => 'element-block']])->textInput(['placeholder'=>"username *"]);?>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control element-block" placeholder="Password *">
+                    <?=$form->field($model,'password_hash', ['options' => ['class' => 'element-block']])->passwordInput(['placeholder'=>"Password *"]);?>
                 </div>
                 <div class="btns-wrap">
                     <div class="wrap">
-                        <label for="rem2" class="custom-check-wrap fw-normal font-lato">
-                            <input type="checkbox" id="rem2" class="customFormReset">
-                            <span class="fake-label element-block">Remember me</span>
-                        </label>
-                        <button type="submit"
-                            class="btn btn-theme btn-warning fw-bold font-lato text-uppercase">Login</button>
-                    </div>
-                    <div class="wrap text-right">
-                        <p>
-                            <a href="#" class="forget-link">Lost your Password?</a>
-                        </p>
+                       <?=Html::submitButton('Login',['class'=>'btn btn-theme btn-warning fw-bold font-lato text-uppercase','name'=>"login",'value'=>'login'])?>
                     </div>
                 </div>
-            </form>
-
+            <?php ActiveForm::end();?>
         
 
         </div>
         <div class="col-xs-12 col-md-6">
             <!-- user log form -->
-            <form action="#" class="user-log-form">
+            <?php 
+                $form = ActiveForm::begin([
+                            'options'=>[
+                                'class'=>'user-log-form',
+                            ],
+                            'fieldConfig' => [
+                                'template' => "\n{beginWrapper}\n{input}\n{error}\n{endWrapper}",
+                               
+                            ],
+                ]);
+                ?>
                 <h2>Register Form</h2>
                 <div class="form-group">
-                    <input type="email" class="form-control element-block" placeholder="Email address *">
+                    <?=$form->field($model,'username', ['options' => ['class' => 'element-block']])->textInput(['placeholder'=>"username *"]);?>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control element-block" placeholder="Password *">
+                    <?=$form->field($model,'email', ['options' => ['class' => 'element-block']])->textInput(['placeholder'=>"email *"]);?>
+                </div>
+                <div class="form-group">
+                    <?=$form->field($model,'password_hash', ['options' => ['class' => 'element-block']])->passwordInput(['placeholder'=>"Password *"]);?>
                 </div>
                 <div class="btns-wrap">
                     <div class="wrap">
-                        <button type="submit"
-                            class="btn btn-theme btn-warning fw-bold font-lato text-uppercase">Register</button>
+                       <?=Html::submitButton('Register',['class'=>'btn btn-theme btn-warning fw-bold font-lato text-uppercase','name'=>"regster",'value'=>'regster'])?>
                     </div>
                 </div>
-            </form>
+            <?php ActiveForm::end();?>
         </div>
+
+      
+
     </div>
 </section>

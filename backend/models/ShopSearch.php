@@ -17,8 +17,8 @@ class ShopSearch extends Shop
     public function rules()
     {
         return [
-            [['id', 'category_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['title', 'price', 'content'], 'safe'],
+            [['id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['title', 'price', 'content','category_id'], 'safe'],
         ];
     }
 
@@ -57,9 +57,9 @@ class ShopSearch extends Shop
         }
 
         // grid filtering conditions
+        $query->joinWith('category');
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
@@ -68,6 +68,7 @@ class ShopSearch extends Shop
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'price', $this->price])
+            ->andFilterWhere(['like', 'shop_category.category_name', $this->category_id])
             ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

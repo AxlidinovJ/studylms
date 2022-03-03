@@ -24,33 +24,32 @@ class SiteController extends Controller
 {
    public $layout = "main2";
 
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+        public function behaviors()
+        {
+            return [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'only' => ['logout', 'signup','signup1'],
+                    'rules' => [
+                        [
+                            'actions' => ['login','error','signup','signup1'],
+                            'allow' => true,
+                        ],
+                        [
+                            'actions' => ['logout'],
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
                     ],
                 ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post','GET'],
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'logout' => ['post'],
+                    ],
                 ],
-            ],
-        ];
-    }
+            ];
+        }
 
     /**
      * {@inheritdoc}
@@ -91,13 +90,34 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['index/index']);
         }
 
         $model->password = '';
 
         return $this->render('login', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionLogin1()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->redirect(['index/index']);
+        }
+
+        $model->password = '';
+
+        return $this->renderAjax('login', [
             'model' => $model,
         ]);
     }
@@ -111,7 +131,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        return $this->redirect(['index/index']);
     }
 
     /**
@@ -158,10 +178,25 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
     
-            return $this->goHome();
+            return $this->redirect(['index/index']);
         }
        
         return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionSignup1()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+    
+            return $this->redirect(['index/index']);
+        }
+       
+        return $this->renderAjax('signup', [
             'model' => $model,
         ]);
     }

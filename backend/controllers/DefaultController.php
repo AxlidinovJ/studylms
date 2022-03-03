@@ -11,12 +11,12 @@ class DefaultController extends Controller
 {
 
 
-    public function beforeAction($action){            
-        if ($action->id == 'delete') {
-            $this->enableCsrfValidation = false;
-        }
-        return true;
-    }
+    // public function beforeAction($action){            
+    //     if ($action->id == 'delete') {
+    //         $this->enableCsrfValidation = false;
+    //     }
+    //     return true;
+    // }
 
     public function behaviors()
     {
@@ -29,6 +29,11 @@ class DefaultController extends Controller
                         // 'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions'=>['login'],
+                        'allow'=>true,
+                        'roles'=>["?"],
                     ],
                 ],
             ],

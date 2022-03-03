@@ -4,17 +4,19 @@ namespace backend\models;
 
 use app\models\Coursescategory;
 use common\models\User;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\helpers\ArrayHelper;
 use yii\behaviors\TimestampBehavior;
 
+    
+
 
 class Courses extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+   
+
     public static function tableName()
     {
         return 'courses';
@@ -33,13 +35,21 @@ class Courses extends \yii\db\ActiveRecord
         return [
             [['category_id',  'price'], 'integer'],
             [['content','duration','hours'], 'string'],
-            [['category_id', 'price', 'title', 'img','content','instruktor'], 'required'],
+            [['category_id','duration','price', 'title', 'img','content','instruktor'], 'required'],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    const CREATED_COURSES = 'created';
+    const UPDATED_COURSES = 'updated';
+    
+    public function scenarios()
+    {
+        return [
+            self::CREATED_COURSES =>['category_id','price','content','duration','hours','img','instruktor','title'],
+            self::UPDATED_COURSES =>['category_id','price','content','duration','hours','instruktor','title'],
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
@@ -47,8 +57,6 @@ class Courses extends \yii\db\ActiveRecord
             'title' => 'Title',
             'category_id' => 'Category ID',
             'instruktor' => 'Instruktor',
-            'star' => 'Star',
-            'view' => 'View',
             'img' => 'Img',
             'content' => 'Content',
             'price' => 'Price',

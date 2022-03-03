@@ -51,7 +51,7 @@ class CoursesController extends DefaultController
     public function actionCreate()
     {
         $model = new Courses();
-
+        $model->scenario = Courses::CREATED_COURSES;
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $rasm = UploadedFile::getInstance($model,'img');
@@ -82,6 +82,7 @@ class CoursesController extends DefaultController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Courses::UPDATED_COURSES;
         $nomi = $model->img; 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {

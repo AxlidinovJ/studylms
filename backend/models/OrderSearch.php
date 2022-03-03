@@ -17,7 +17,7 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['id', 'phone', 'status'], 'integer'],
+            [['id', 'phone', 'status','created_at','updated_at'], 'integer'],
             [['first_name', 'last_name', 'email'], 'safe'],
         ];
     }
@@ -40,7 +40,7 @@ class OrderSearch extends Order
      */
     public function search($params)
     {
-        $query = Order::find();
+        $query = Order::find()->orderBy('created_at DESC');
 
         // add conditions that should always apply here
 

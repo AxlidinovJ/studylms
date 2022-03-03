@@ -49,9 +49,9 @@ $product3 = Shop::find()->limit(3)->all();
 								<!-- query wrap -->
 								<div class="query-wrap">
 									<div class="quantity">
-										<input type="number" class="form-control" min="1" value="1">
+										<input type="number" id='soni' class="form-control" min="1" value="1" max='20'>
 									</div>
-									<a href="<?=Url::to(['index/cartage','id'=>$model->id])?>" class="btn btn-warning btn-theme font-lato text-uppercase card">Add to cart</a>
+									<a href="<?=Url::to(['index/cartage','id'=>$model->id])?>" data-id="<?=$model->id?>" class="btn btn-warning btn-theme font-lato text-uppercase card">Add to cart</a>
 								</div>
 								<div class="categories-wrap font-lato">
 									<p>Category: <a href="#"><?=$model->category->category_name?></a></p>
