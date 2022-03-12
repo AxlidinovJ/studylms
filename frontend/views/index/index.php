@@ -227,7 +227,7 @@ $this->title = "STUDYLMS";
 				<div class="form-holder">
 					<div class="form-row">
 						<div class="form-group">
-							<select data-placeholder="Category" class="chosen-select-no-single" name='category'>
+							<select data-placeholder="Category"  name='category'>
 								<option value="">Hammasi</option>
 								<?php 
 								$category = Coursescategory::find()->all();
@@ -237,7 +237,7 @@ $this->title = "STUDYLMS";
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="search" name="s" class="" placeholder="Qidirish" style="border: 0px">
+							<input style="width: 100%; border: 0.1px;" type="search" name="s" class="" placeholder="Qidirish" style="border: 0px">
 						</div>
 					</div>
 					<button type="submit" class="btn btn-theme btn-warning no-shrink text-uppercase">Search</button>

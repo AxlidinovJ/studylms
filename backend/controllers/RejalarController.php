@@ -98,6 +98,7 @@ class RejalarController extends DefaultController
             if ($model->load($this->request->post())) {
                 $rasm = UploadedFile::getInstance($model,'img');
                 if($rasm){
+                    if(file_exists("photos/".$nomi))
                     unlink("photos/".$nomi);
                     $random = new Security();
                     $nomi = $random->generateRandomString(32).".".$rasm->extension;

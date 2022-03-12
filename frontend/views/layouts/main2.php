@@ -90,7 +90,7 @@ Modal::end();
 						<div class="col-xs-3 col justify-end">
 							<!-- user links -->
 							<ul class="list-unstyled user-links fw-bold font-lato">
-								<li><a href="#popup1" class="lightbox">Login</a> <span class="sep">|</span> <a href="#popup2" class="lightbox">Register</a></li>
+								<li><a href="#"  class="loginModal" id='login' onclick="showLogin()" class="">Login</a> <span class="sep">|</span> <a href="#" class="" onclick="showSignup()" id='regster' >Register</a></li>
 							</ul>
 						</div>
 					</div>
@@ -134,8 +134,6 @@ Modal::end();
 										<li class="dropdown">
 											<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
 											<ul class="dropdown-menu">
-												<li><a href="<?=url::to(['index/aboutus'])?>">About us</a></li>
-												<li><a href="<?=url::to(['index/forum'])?>">Forum Page</a></li>
 												<li><a href="<?=url::to(['index/instructorslist'])?>">Instructors List</a></li>
 												<?php if(Yii::$app->user->isGuest){?>
 												<li><a href="<?=url::to(['site/login'])?>">Login</a></li>
@@ -156,23 +154,25 @@ Modal::end();
 											</ul>
 										</li>
 										<li class="dropdown"><a href="<?=url::to(['index/contact'])?>">CONTACT</a></li>
+										<li>
 										<?php if(!Yii::$app->user->isGuest):?>
-										<form action="<?=Url::to(['site/logout'])?>" method="post" class="d-none">
+											<form action="<?=Url::to(['site/logout'])?>" method="post" class="d-none">
 											  <input type="hidden" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
-												<?=Html::submitInput("Chiqish {".yii::$app->user->identity->username."}")?>
+												<?=Html::submitInput(strtoupper("Chiqish {".yii::$app->user->identity->username."}"),['style'=>'color: inherit; font-size: 13px;line-height: 1.15385;padding: 0;display: inline; background-color: transparent; border:none'])?>
 										</form>
 										<?php endif; ?>
 
+										</li>
 									</ul>
 								</div>
 								<!-- navbar form -->
-								<form action="#" class="navbar-form navbar-search-form navbar-right">
+								<form action="<?=url::to(['index/shop'])?>" class="navbar-form navbar-search-form navbar-right">
 									<a class="fas fa-search search-opener" role="button" data-toggle="collapse" href="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse"><span class="sr-only">search opener</span></a>
 									<!-- search collapse -->
 									<div class="collapse search-collapse" id="searchCollapse">
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Search &hellip;">
-											<button type="button" class="fas fa-search btn"><span class="sr-only">search</span></button>
+											<input type="text" class="form-control" placeholder="Search &hellip;" name="s">
+											<button type="submit" class="fas fa-search btn"><span class="sr-only">Qidirish</span></button>
 										</div>
 									</div>
 								</form>
@@ -212,7 +212,7 @@ Modal::end();
 			<aside class="aside container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-6 col-md-3 col">
-						<div class="logo"><a href="<?=url::to(['index/index'])?>"><img src="images/logo.png" alt="studyLMS"></a></div>
+					<div class="logo"><a href="<?=url::to(['index/index'])?>"><img src="<?=url::to('@web/images/logo.png')?>" alt="studyLMS"></a></div>
 						<p>We have over 20 years experience providing expert Educational both businesses and individuals. Our Investment Committee brings cades the industry expertise in driving our investment approach. portfolio constructor and allocation</p>
 						<a href="#" class="btn btn-default text-uppercase">Start Leaning Now</a>
 					</div>

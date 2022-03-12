@@ -13,12 +13,9 @@ $this->params['title'] = 'user';
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+   <?="<h2>".$model->name." -  ".$model->username."</h2>";?>
 
     <?= $form->field($model, 'type')->dropDownList([ 1 => 'Admin', 2 => 'O\'qituvchi', 3 => 'O\'quvchi', ], ['prompt' => 'Birini tanlang']) ?>
-
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'status')->dropDownList([ 9 => 'Aktiv emas', 10 => 'Aktiv', ], ['prompt' => 'Birini tanlang'])  ?>
 

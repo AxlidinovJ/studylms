@@ -6,6 +6,7 @@ use backend\models\Courses;
 use backend\models\User;
 use common\models\Blogs;
 use common\models\Coment;
+use common\models\Message;
 use common\models\Rejalar;
 use common\models\Shop;
 use common\models\Views;
@@ -111,6 +112,36 @@ class IndexController extends Controller
 
 
 
+    public function actionShop($s = null)
+    {
+        $this->layout = "main2";
+       
+        $max = Yii::$app->request->get('max');
+        $min = Yii::$app->request->get('min');
+
+
+        if($max>0 and $min>10 and $max>$min and $max<10000){
+            $data  = new ActiveDataProvider([
+                'query'=>Shop::find()->where("price>=$min")->andWhere("price<=$max"),
+                'pagination'=>[
+                    'pageSize'=>6,
+                ],
+            ]);
+        }else{
+            $data  = new ActiveDataProvider([
+                'query'=>Shop::find()->filterWhere(['like','title',$s]),
+                'pagination'=>[
+                    'pageSize'=>6,
+                ],
+            ]);
+
+        }
+        
+
+        return $this->render('shop',['dataProvider'=>$data]);
+    }
+
+
     public function actionInstructorsingle($id)
     {
         $this->layout = "main2";
@@ -166,7 +197,17 @@ class IndexController extends Controller
     public function actionContact()
     {
         $this->layout = "main2";
-        return $this->render('contact');
+        $modal = new Message();
+        if($modal->load(Yii::$app->request->post())){
+            $modal->created_at = time();
+            $modal->save();
+            // echo "<pre>";
+            // print_r($modal);
+            // echo "</pre>";
+            Yii::$app->session->setFlash('success',"Murojatingiz qabul qilindi! Tez orada ko`rib chiqladi! Va siz bilan bog`lanamiz");
+            return $this->redirect(['index/index']);
+        }
+        return $this->render('contact',['model'=>$modal]);
     }
 
     public function actionAboutus()
@@ -240,34 +281,6 @@ class IndexController extends Controller
         }
 
    
-
-    public function actionShop()
-    {
-        $this->layout = "main2";
-       
-        $max = Yii::$app->request->get('max');
-        $min = Yii::$app->request->get('min');
-
-        if($max>0 and $min>10 and $max>$min and $max<10000){
-            $data  = new ActiveDataProvider([
-                'query'=>Shop::find()->where("price>=$min")->andWhere("price<=$max"),
-                'pagination'=>[
-                    'pageSize'=>6,
-                ],
-            ]);
-        }else{
-            $data  = new ActiveDataProvider([
-                'query'=>Shop::find(),
-                'pagination'=>[
-                    'pageSize'=>6,
-                ],
-            ]);
-
-        }
-        
-
-        return $this->render('shop',['dataProvider'=>$data]);
-    }
 
 
     public function actionCartage()

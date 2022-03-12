@@ -1,2 +1,0 @@
-$("#blok").load($(this).attr('href'));
-        $('#myModal').modal('show');

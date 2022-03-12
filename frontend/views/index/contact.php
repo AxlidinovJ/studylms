@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 
 $this->title = 'Contact';
@@ -54,29 +55,30 @@ $this->params['title'] = $this->title;
 					</div>
 					<hr class="sep-or element-block" data-text="or">
 					<!-- contact form -->
-					<form action="#" class="contact-form">
+					<?php $form = ActiveForm::begin(['options'=>['class'=>'contact-form']])?>
 						<h3 class="text-center">Drop Us a Message</h3>
 						<div class="row">
 							<div class="col-xs-12 col-sm-6">
-								<div class="form-group">
-									<input type="text" class="form-control element-block" placeholder="Your Name">
-								</div>
+								<?=$form->field($model,'name')->textInput()?>
 							</div>
 							<div class="col-xs-12 col-sm-6">
 								<div class="form-group">
-									<input type="email" class="form-control element-block" placeholder="Email">
+									<!-- <input type="email" class="form-control element-block" placeholder="Email"> -->
+								<?=$form->field($model,'email')->textInput()?>
 								</div>
 							</div>
 							<div class="col-xs-12">
 								<div class="form-group">
-									<textarea class="form-control element-block" placeholder="Message"></textarea>
+									<!-- <textarea class="form-control element-block" placeholder="Message"></textarea> -->
+									<?=$form->field($model,'message')->textarea(['class'=>'form-control element-block'])?>
+
 								</div>
 							</div>
 						</div>
 						<div class="text-center">
 							<button type="submit" class="btn btn-theme btn-warning text-uppercase font-lato fw-bold">send message</button>
 						</div>
-					</form>
+					<?php ActiveForm::end()?>
 				</div>
 				<!-- mapHolder -->
 				<div class="mapHolder">

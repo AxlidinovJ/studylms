@@ -74,7 +74,7 @@ $this->params['title'] = 'user';
             //'verification_token',
             [
                 'class' => ActionColumn::className(),
-                'template'=>'{view}<br>{delete}',
+                'template'=>'{update}<br>{view}<br>{delete}',
                 'urlCreator' => function ($action, User $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }

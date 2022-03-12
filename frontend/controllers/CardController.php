@@ -8,15 +8,14 @@ use frontend\models\Card;
 use yii\web\Controller;
 use yii;
 class CardController extends Controller{
-
-    public function actionAdd($id)
+    public function actionAdd($id,$soni=1)
     {
         $product = Shop::findOne($id);
         if(empty($product)) return false;
         $session = Yii::$app->session;
         $session->open();
         $card = new Card();
-        $card->AddToCard($product);
+        $card->AddToCard($product,$soni);
         return $this->renderAjax('add');
     }
 

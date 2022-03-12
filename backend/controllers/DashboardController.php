@@ -25,6 +25,12 @@ class DashboardController extends DefaultController
 
     public function actionIndex()
     {
+        
+        // if(!Yii::$app->user->can('admin')){
+        //     Yii::$app->user->logout();
+        //     return $this->goHome();
+        // }
+
         return $this->render('index');
     }
 

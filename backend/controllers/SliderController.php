@@ -6,8 +6,10 @@ use common\models\Slider;
 use Yii;
 use yii\base\Security;
 use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 /**
  * SliderController implements the CRUD actions for Slider model.
@@ -15,6 +17,7 @@ use yii\web\UploadedFile;
 class SliderController extends DefaultController
 {
   
+   
 
     public function actionIndex()
     {

@@ -46,16 +46,16 @@ $admin  =  yii::$app->user->identity;
 
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?=url::to('@web/images/users/'.$admin->photo)?>" class="user-image" alt="User Image">
-                                <span class="hidden-xs"><?=$admin->name?></span>
+                                <img src="<?=url::to('@web/images/users/'.$admin->photo ??"no-img.png")?>" class="user-image" alt="User Image">
+                                <span class="hidden-xs"><?=$admin->name??"User"?></span>
                             </a>
                             <ul class="dropdown-menu">
 
                                 <li class="user-header">
-                                    <img src="<?=url::to('@web/images/users/'.$admin->photo)?>" class="img-circle" alt="User Image">
+                                    <img src="<?=url::to('@web/images/users/'. $admin->photo ?? "no-img.png" )?>" class="img-circle" alt="User Image">
                                     <p>
-                                        <?=$admin->username?>
-                                        <small><?=date('d-M Y',$admin->created_at)?></small>
+                                        <?=($admin->username)??"User"?>
+                                        <small><?=date('d-M Y',($admin->created_at)??time())?></small>
                                     </p>
                                 </li>
 
@@ -79,7 +79,7 @@ $admin  =  yii::$app->user->identity;
                                         <a href="#" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="<?=url::to(['dashboard/logout'])?>" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="<?=url::to(['site/logout'])?>" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                             </ul>
@@ -99,10 +99,10 @@ $admin  =  yii::$app->user->identity;
 
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="<?=url::to('@web/images/users/'.$admin->photo??"no-img.png")?>" class="img-circle" alt="User Image">
+                        <img src="<?=url::to('@web/images/users/'.$admin->photo ??"no-img.png"??"no-img.png")?>" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p><?=$admin->name?></p>
+                        <p><?=($admin->name)??"User"?></p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -209,6 +209,14 @@ $admin  =  yii::$app->user->identity;
                     <li class="<?=$this->params['title']=='order'?'active':''?>">
                         <a href="<?=url::to(['/order/index'])?>">
                             <i class="fa fa-dashboard"></i> <span>Buyurtmalar</span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="<?=$this->params['title']=='message'?'active':''?>">
+                        <a href="<?=url::to(['/message/index'])?>">
+                            <i class="fa fa-dashboard"></i> <span>Xatlar</span>
                             <span class="pull-right-container">
                             </span>
                         </a>

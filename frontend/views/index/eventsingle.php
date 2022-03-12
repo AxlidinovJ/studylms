@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Url;
+$this->title =  $reja->title;
 
+$this->params['breadcrumbs'][] = $this->title;
+$this->params['title'] = $this->title;
 ?>
 
 <div id="two-columns" class="container">
@@ -95,11 +98,18 @@ use yii\helpers\Url;
 					<div class="shareWrap">
 						<strong class="title font-lato">Share:</strong>
 						<ul class="socail-networks list-unstyled">
-							<li><a href="#" class="facebook"><span class="fab fa-facebook-f"></span></a></li>
-							<li><a href="#" class="twitter"><span class="fab fa-twitter"></span></a></li>
-							<li><a href="#" class="google"><span class="fab fa-google-plus-g"></span></a></li>
-							<li><a href="#"><span class="fas fa-plus"></span></a></li>
-						</ul>
+								<?php 
+									$SERVER_NAME = $_SERVER['SERVER_NAME'];
+									$REQUEST_URI = $_SERVER['REQUEST_URI'];
+									$url = "https://".$SERVER_NAME."".$REQUEST_URI;
+									$telegram = "https://telegram.me/share/url?url=".$url;
+									$twitter = "https://twitter.com/intent/tweet?url=$url&text=".$this->title;
+									$facebook = "https://www.facebook.com/sharer.php?s=100&p[title]=".$this->title."&p[summary]=$SERVER_NAME&p[url]=$url";
+								?>
+									<li><a href="<?=$facebook?>" target="_blank" class="facebook"><span class="fab fa-facebook-f"></span></a></li>
+									<li><a href="<?=$twitter?>"  target="_blank" class="twitter"><span class="fab fa-twitter"></span></a></li>
+									<li><a href="<?=$telegram?>" target="_blank" class="telegram"><span class="fab fa-telegram"></span></a></li>
+								</ul>
 					</div>
 				</div>
 			</div>

@@ -2,16 +2,21 @@
 
 namespace backend\controllers;
 
+use backend\models\User as ModelsUser;
 use common\models\LoginForm;
 use common\models\User;
 use Yii;
+use yii\web\Controller;
 use yii\web\Response;
+use yii\filters\AccessControl;
 
 /**
  * Site controller
  */
-class SiteController extends DefaultController
+class SiteController extends DefaultController  
 {
+    
+
    
     /**
      * {@inheritdoc}
@@ -31,7 +36,8 @@ class SiteController extends DefaultController
      * @return string
      */
     public function actionIndex()
-    {
+    {   
+
         return $this->render('index');
     }
 
@@ -43,17 +49,23 @@ class SiteController extends DefaultController
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+              if(Yii::$app->user->can('admin')){
+                return $this->goHome();
+            }
         }
 
         $this->layout = 'blank';
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ( $model->load(Yii::$app->request->post())  && $model->login() ) {
+            
+            if(!Yii::$app->user->can('admin')){
+                $model->password = '';
+                Yii::$app->user->logout();
+            }
             return $this->goBack();
         }
 
-        $model->password = '';
 
         return $this->render('login', [
             'model' => $model,
