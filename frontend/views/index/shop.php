@@ -41,8 +41,8 @@ use yii\widgets\ListView;
                 'dataProvider'=>$dataProvider,
                 'itemView'=>'shop_item',
                 'layout' => "<span>{items}</span>\n",
-								'itemOptions' => [
-									'tag' => false
+                'itemOptions' => [
+                        	'tag' => false
                                 ],
             ]);
             
