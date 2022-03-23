@@ -8,6 +8,7 @@ use frontend\models\Card;
 use yii\web\Controller;
 use yii;
 class CardController extends Controller{
+    
     public function actionAdd($id,$soni=1)
     {
         $product = Shop::findOne($id);
